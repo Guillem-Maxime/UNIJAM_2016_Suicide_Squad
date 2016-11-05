@@ -7,6 +7,10 @@ using System.Collections;
 
 public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
 
+    private bool isDraggable;
+    public bool getDraggable() { return isDraggable; }
+    public void setDraggable(bool b) { isDraggable = b; }
+
     public static Object itemBeingDragged;
     private Vector3 startPosition;
     [SerializeField]
@@ -16,9 +20,13 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        itemBeingDragged = gameObject.GetComponent<Object>();
-        startPosition = transform.position;
-        GetComponent<CanvasGroup>().blocksRaycasts = false;
+        if (isDraggable)
+        {
+            itemBeingDragged = gameObject.GetComponent<Object>();
+            startPosition = transform.position;
+            GetComponent<CanvasGroup>().blocksRaycasts = false;
+        }
+
     }
 
     #endregion
