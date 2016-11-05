@@ -44,11 +44,12 @@ public class DaysManager : MonoBehaviour {
         }
         else
         {
-            /*for (tous les events du jour n° mDay pas encore lancés) {
-                if (timerTab[mDay].Get() > eventmanager.get(i).time) {
-                    eventmanager.get(i).launch();
+            for (int i = 0; i < eventManager.eventsOfDays[mDay].Length; i++) {
+                if (timerTab[mDay].Get() > eventManager.eventsOfDays[mDay][i].Time)
+                {
+                    eventManager.eventsOfDays[mDay][i].launch();
                 }
-            }*/
+            }
         }
     }
 
