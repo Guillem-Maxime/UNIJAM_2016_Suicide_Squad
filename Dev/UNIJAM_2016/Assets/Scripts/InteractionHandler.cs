@@ -16,6 +16,7 @@ public class InteractionHandler : MonoBehaviour {
 
     private void Interaction(Object itemDragged, Object itemCollided)
     {
+        /*
         switch (itemDragged.getName())
         {
             case ("Gloves"):
@@ -33,7 +34,7 @@ public class InteractionHandler : MonoBehaviour {
             default:
                 //no interaction
                 break;
-        }
+        }*/
     }
 
 
