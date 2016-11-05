@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour {
 
     public GameObject prologue;
     public Text prologueText;
-    public float prologueDuration = 13.0f;
+    public float BasicDuration = 13.0f;
 
     public GameObject bedroom;
 
@@ -42,16 +42,35 @@ public class UIManager : MonoBehaviour {
         DialogBox.SetActive(false);
     }
 
-    public void AffichePrologue(string phrase)
+    public void AffichePrologue(string phrase, float prologueDuration = 13.0f)
     {
         prologueText.text = phrase;
-        StartCoroutine(PrologueCoroutine());
+        StartCoroutine(PrologueCoroutine(prologueDuration));
     }
 
-    private IEnumerator PrologueCoroutine()
+    public void AfficheMultiplePrologue(string[] phrases, int n, float prologueDuration = 8.0f)
+    {
+        StartCoroutine(MultipleCoroutine(phrases, n, prologueDuration));
+    }
+
+    private IEnumerator PrologueCoroutine(float prologueDuration)
     {
         bedroom.SetActive(false);
         prologue.SetActive(true);
+        yield return new WaitForSeconds(prologueDuration);
+        prologue.SetActive(false);
+        bedroom.SetActive(true);
+    }
+
+    private IEnumerator MultipleCoroutine(string[] phrases, int n, float prologueDuration)
+    {
+        bedroom.SetActive(false);
+        prologue.SetActive(true);
+        for (int i = 0; i < n; i++)
+        {
+            prologueText.text = phrases[i];
+            yield return new WaitForSeconds(prologueDuration);
+        }
         yield return new WaitForSeconds(prologueDuration);
         prologue.SetActive(false);
         bedroom.SetActive(true);
@@ -79,7 +98,7 @@ public class UIManager : MonoBehaviour {
         daysManager.ResetAllTimers();
         bedroom.SetActive(false);
         prologue.SetActive(true);
-        yield return new WaitForSeconds(prologueDuration);
+        yield return new WaitForSeconds(BasicDuration);
         game.SetActive(false);
         menu.SetActive(true);
         bedroom.SetActive(true);

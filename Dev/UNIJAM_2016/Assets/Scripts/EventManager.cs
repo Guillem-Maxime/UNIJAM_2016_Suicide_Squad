@@ -7,6 +7,8 @@ public class EventManager : MonoBehaviour {
     UIManager uiManager;
     GaugeManager gaugeManager;
 
+    public GameObject chat;
+
     public Dictionary<int, Event[]> eventsOfDays;
 
     private Event[] eDayOne;
@@ -39,6 +41,7 @@ public class EventManager : MonoBehaviour {
         initiateDays();
         initiateEventsOfDays();
         BuildActions();
+        chat.SetActive(false);
     }
 
     void Update()
@@ -170,6 +173,7 @@ public class EventManager : MonoBehaviour {
     {
         uiManager.Dialog("Qu'est-ce que c'est que ça ?", 5.0f);
         SoundManager.PlayBruitage("miaou");
+        chat.SetActive(true);
     }
 
     public void ActionOne3()
@@ -192,5 +196,7 @@ public class EventManager : MonoBehaviour {
         {
             eDayTwo[i].AEteLance = false;
         }
+
+        chat.SetActive(false);
     }
 }
