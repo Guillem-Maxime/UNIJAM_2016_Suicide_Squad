@@ -46,7 +46,7 @@ public class DaysManager : MonoBehaviour {
         parts[3] = "Combien de temps vais-je tenir?";
         parts[4] = "";
         parts[5] = "Les Semi-affordants vous présentent...";
-        parts[6] = "UNE SEMAINE DANS LE NOIR";
+        parts[6] = "";
 
         
         eventManager = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>();
