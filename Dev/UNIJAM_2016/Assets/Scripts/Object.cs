@@ -9,6 +9,7 @@ public class Object : MonoBehaviour{
     [SerializeField]
     private string nameObject;
     public string getName() { return nameObject; }
+    [SerializeField]
     private string tagObject;
     public string getTag() { return tagObject; }
 
@@ -22,6 +23,14 @@ public class Object : MonoBehaviour{
 
 	// Use this for initialization
 	void Start () {
+        if(spriteList.Count == 0)
+        {
+            spriteList.Add(this.GetComponent<Renderer>().GetComponent<Sprite>());
+        }
+        else
+        {
+            spriteList[0] = this.GetComponent<Renderer>().GetComponent<Sprite>();
+        }
 
 	}
 	
