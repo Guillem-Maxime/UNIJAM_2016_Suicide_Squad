@@ -10,9 +10,9 @@ public class Object : MonoBehaviour{
     [SerializeField]
     private string nameObject;
     public string getName() { return nameObject; }
-    [SerializeField]
-    private string tagObject;
-    public string getTag() { return tagObject; }
+    //[SerializeField]
+    //private string tagObject;
+    //public string getTag() { return tagObject; }
 
     [SerializeField]
     public List<Sprite> spriteList;
