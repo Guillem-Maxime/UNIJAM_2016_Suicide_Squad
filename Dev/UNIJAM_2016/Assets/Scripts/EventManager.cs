@@ -9,35 +9,46 @@ public class EventManager : MonoBehaviour {
     private Event[] eDayOne;
     private Event[] eDayTwo;
     private Event[] eDayThree;
-    private Event[] eDayFour;
-    private Event[] eDayFive;
-    private Event[] eDaySix;
-    private Event[] eDaySeven;
-    private Event[] eDayEight;
-    private Event[] eDayNine;
+    //private Event[] eDayFour;
+    //private Event[] eDayFive;
+    //private Event[] eDaySix;
+    //private Event[] eDaySeven;
+    //private Event[] eDayEight;
 
-    private int nbEventDay1 = 0;
+    private int nbEventDay1 = 1;
     private int nbEventDay2 = 0;
     private int nbEventDay3 = 0;
-    private int nbEventDay4 = 0;
-    private int nbEventDay5 = 0;
-    private int nbEventDay6 = 0;
-    private int nbEventDay7 = 0;
-    private int nbEventDay8 = 0;
-    private int nbEventDay9 = 0;
+    //private int nbEventDay4 = 0;
+    //private int nbEventDay5 = 0;
+    //private int nbEventDay6 = 0;
+    //private int nbEventDay7 = 0;
+    //private int nbEventDay8 = 0;
 
+    GameObject[] eventDayOneTabObjects;
+
+    void Start()
+    {
+        eventsOfDays = new Dictionary<int, Event[]>();
+        initiateDays();
+        initiateEventsOfDays();
+        BuildActions();
+    }
+
+    void Update()
+    {
+
+    }
 
     public void initiateEventsOfDays()
     {
         eventsOfDays.Add(0, eDayOne);
         eventsOfDays.Add(1, eDayTwo);
         eventsOfDays.Add(2, eDayThree);
-        eventsOfDays.Add(3, eDayFour);
-        eventsOfDays.Add(4, eDayFive);
-        eventsOfDays.Add(5, eDaySix);
-        eventsOfDays.Add(6, eDaySeven);
-        eventsOfDays.Add(7, eDayEight);
-        eventsOfDays.Add(8, eDayNine);
+        //eventsOfDays.Add(3, eDayFour);
+        //eventsOfDays.Add(4, eDayFive);
+        //eventsOfDays.Add(5, eDaySix);
+        //eventsOfDays.Add(6, eDaySeven);
+        //eventsOfDays.Add(7, eDayEight);
 
     }
 
@@ -46,20 +57,19 @@ public class EventManager : MonoBehaviour {
         eDayOne = new Event[nbEventDay1];
         eDayTwo = new Event[nbEventDay2];
         eDayThree = new Event[nbEventDay3];
-        eDayFour = new Event[nbEventDay4];
-        eDayFive = new Event[nbEventDay5];
-        eDaySix = new Event[nbEventDay6];
-        eDaySeven = new Event[nbEventDay7];
-        eDayEight = new Event[nbEventDay8];
-        eDayNine = new Event[nbEventDay9];
+        //eDayFour = new Event[nbEventDay4];
+        //eDayFive = new Event[nbEventDay5];
+        //eDaySix = new Event[nbEventDay6];
+        //eDaySeven = new Event[nbEventDay7];
+        //eDayEight = new Event[nbEventDay8];
 
 
-        /*  GameObject[] eventDayOneTabObjects = GameObject.FindGameObjectsWithTag("EventDay1");
-          for (int i = 0; i < nbEventDay1; i++)
-          {
-              eDayOne[i] = eventDayOneTabObjects[i].GetComponent<Event>();
-          }
-
+        eventDayOneTabObjects = GameObject.FindGameObjectsWithTag("EventDay1");
+        for (int i = 0; i < nbEventDay1; i++)
+        {
+            eDayOne[i] = eventDayOneTabObjects[i].GetComponent<Event>();
+        }
+        /*
           GameObject[] eventDayTwoTabObjects = GameObject.FindGameObjectsWithTag("EventDay2");
           for (int i = 0; i < nbEventDay2; i++)
           {
@@ -109,16 +119,22 @@ public class EventManager : MonoBehaviour {
           }*/
     }
 
-    // Use this for initialization
+    public void BuildActions()
+    {
+        eDayOne[0].Time = 10.0f;
+        eDayOne[0].action = () => ActionOne0();
+    }
 
-    void Start () {
-        eventsOfDays = new Dictionary<int, Event[]>();
-        initiateDays();
-        initiateEventsOfDays();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public void ActionOne0()
+    {
+        Debug.Log("cet event fonctionne si je m'affiche au bout de 10 secondes le premier jour");
+    }
+
+    public void ResetEvents()
+    {
+        for (int i = 0; i < eDayOne.Length; i++)
+        {
+            eDayOne[i].AEteLance = false;
+        }
+    }
 }

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
 
+    DaysManager daysManager;
 
     public GameObject menu;
     public GameObject game;
@@ -14,13 +15,15 @@ public class UIManager : MonoBehaviour {
 
     public GameObject bedroom;
 
+    public GameObject lampe;
+
     void Start () {
-	
+        daysManager = GameObject.FindGameObjectWithTag("DaysManager").GetComponent<DaysManager>();
 	}
 	
 
 	void Update () {
-	
+	    
 	}
 
     public void AffichePrologue(string phrase)
@@ -57,10 +60,14 @@ public class UIManager : MonoBehaviour {
 
     private IEnumerator EndCoroutine()
     {
+        daysManager.ResetAllTimers();
         bedroom.SetActive(false);
         prologue.SetActive(true);
         yield return new WaitForSeconds(prologueDuration);
         game.SetActive(false);
         menu.SetActive(true);
+        bedroom.SetActive(true);
+        prologue.SetActive(false);
+        lampe.SetActive(true);
     }
 }

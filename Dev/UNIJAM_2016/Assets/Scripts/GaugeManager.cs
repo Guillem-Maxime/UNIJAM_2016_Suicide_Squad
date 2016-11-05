@@ -6,6 +6,7 @@ public class GaugeManager : MonoBehaviour {
 
     UIManager uiManager;
 
+
     int dangerMAX = 100;
     int danger;
     int fatigueMAX = 100;

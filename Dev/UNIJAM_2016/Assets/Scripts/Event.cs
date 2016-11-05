@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
+using System.Collections.Generic;
 
 public class Event : MonoBehaviour {
 
@@ -19,29 +21,19 @@ public class Event : MonoBehaviour {
         set;
     }
 
-    private ObjectManager om;
-
-    private GaugeManager gm;
-
-    private UIManager um;
-
-    public void writeDialogue(string phrase)
-    {
-        print("demande à l'UI d'afficher du texte");
-    }
+    public UnityAction action;
+    public int dangerModif = 0;
+    public int fatigueModif = 0;
 
     public void launch()
     {
-        print("lancement de l'event");
+        action();
     }
 
-	// Use this for initialization
 	void Start () {
-        //GameObject.FindGameObjectWithTag("GaugeManager").GetComponent<GaugeManager>();
-      
-	}
+
+    }
 	
-	// Update is called once per frame
 	void Update () {
 	
 	}

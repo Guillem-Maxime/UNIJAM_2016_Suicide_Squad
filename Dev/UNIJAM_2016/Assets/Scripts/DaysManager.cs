@@ -45,6 +45,7 @@ public class DaysManager : MonoBehaviour {
         else
         {
             for (int i = 0; i < eventManager.eventsOfDays[mDay].Length; i++) {
+                Debug.Log(eventManager.eventsOfDays[mDay][i].AEteLance);
                 if (timerTab[mDay].Get() > eventManager.eventsOfDays[mDay][i].Time && !(eventManager.eventsOfDays[mDay][i].AEteLance))
                 {
                     eventManager.eventsOfDays[mDay][i].launch();
@@ -77,5 +78,16 @@ public class DaysManager : MonoBehaviour {
         uiManager.AffichePrologue(prologueTab[mDay]);
         timerTab[mDay].Set(-uiManager.prologueDuration);
         timerTab[mDay].LetsStart();
+    }
+
+    public void ResetAllTimers()
+    {
+        for (int i = 0; i < timerTab.Length; i++)
+        {
+            timerTab[i].Stop();
+            timerTab[i].Reset();
+        }
+        eventManager.BuildActions();
+        eventManager.ResetEvents();
     }
 }
