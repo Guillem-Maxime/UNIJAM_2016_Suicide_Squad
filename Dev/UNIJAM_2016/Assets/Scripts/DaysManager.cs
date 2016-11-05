@@ -22,15 +22,15 @@ public class DaysManager : MonoBehaviour {
         }
 
         prologueTab = new String[nmbDayMAX];
-        prologueTab[0] = "On n'ose jamais mourir.\r\n On ose tenir à la vie.\r\n lol.";
-        prologueTab[1] = "On n'ose jamais mourir.\r\n On ose tenir à la vie.\r\n lol.";
-        prologueTab[2] = "On n'ose jamais mourir.\r\n On ose tenir à la vie.\r\n lol.";
-        prologueTab[3] = "On n'ose jamais mourir.\r\n On ose tenir à la vie.\r\n lol.";
-        prologueTab[4] = "On n'ose jamais mourir.\r\n On ose tenir à la vie.\r\n lol.";
-        prologueTab[5] = "On n'ose jamais mourir.\r\n On ose tenir à la vie.\r\n lol.";
-        prologueTab[6] = "On n'ose jamais mourir.\r\n On ose tenir à la vie.\r\n lol.";
-        prologueTab[7] = "On n'ose jamais mourir.\r\n On ose tenir à la vie.\r\n lol.";
-        prologueTab[8] = "On n'ose jamais mourir.\r\n On ose tenir à la vie.\r\n lol.";
+        prologueTab[0] = "On n'ose jamais mourir.\r\n On ose tenir à la vie.\r\n Eh oui!";
+        prologueTab[1] = "Je suis le texte du deuxième jour";
+        prologueTab[2] = "Je suis le texte du troisième jour";
+        prologueTab[3] = "Je suis le texte du cinquième jour.\r\n Non, j'ai menti.";
+        prologueTab[4] = "Je suis le vrai texte du cinquième jour.";
+        prologueTab[5] = "Je suis le texte du sixième jour.";
+        prologueTab[6] = "Je suis le texte du septième jour.";
+        prologueTab[7] = "Je suis le texte du huitième jour.";
+        prologueTab[8] = "Je suis le texte du dernier jour.";
         
         eventManager = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>();
         uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
@@ -61,11 +61,12 @@ public class DaysManager : MonoBehaviour {
             timerTab[mDay].Reset();
             mDay++;
             uiManager.AffichePrologue(prologueTab[mDay]);
+            timerTab[mDay].Set(-uiManager.prologueDuration);
             timerTab[mDay].LetsStart();
         }
         else
         {
-            //uiManager -> you win ! 
+            uiManager.AfficheVictoire();
         }
     }
 
@@ -73,6 +74,7 @@ public class DaysManager : MonoBehaviour {
     {
         mDay = 0;
         uiManager.AffichePrologue(prologueTab[mDay]);
+        timerTab[mDay].Set(-uiManager.prologueDuration);
         timerTab[mDay].LetsStart();
     }
 }
