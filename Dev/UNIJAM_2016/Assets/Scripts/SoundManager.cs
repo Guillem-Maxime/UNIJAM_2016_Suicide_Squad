@@ -37,7 +37,7 @@ public class SoundManager : Singleton<SoundManager>
     /// <summary>
     /// Lien vers le bruitage du logo
     /// </summary>
-    public AudioClip bruitageLogo;
+    //public AudioClip bruitageLogo;
 
 
     /// <summary>
@@ -114,12 +114,12 @@ public class SoundManager : Singleton<SoundManager>
     {
         AudioClip originalClip;
         originalClip = null;
-        switch (name)
+        /*switch (name)
         {
             case "Logo":
                 originalClip = bruitageLogo;
                 break;
-        }
+        }*/
         sourceBruitage.PlayOneShot(originalClip);
     }
 

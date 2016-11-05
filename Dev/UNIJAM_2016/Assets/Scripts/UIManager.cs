@@ -17,6 +17,9 @@ public class UIManager : MonoBehaviour {
 
     public GameObject lampe;
 
+    public GameObject DialogBox;
+    public Text DialogText;
+
     void Start () {
         daysManager = GameObject.FindGameObjectWithTag("DaysManager").GetComponent<DaysManager>();
 	}
@@ -25,6 +28,19 @@ public class UIManager : MonoBehaviour {
 	void Update () {
 	    
 	}
+
+    public void Dialog(string phrase, float duration)
+    {
+        StartCoroutine(DialogCoroutine(phrase, duration));
+    }
+
+    private IEnumerator DialogCoroutine(string phrase, float duration)
+    {
+        DialogBox.SetActive(true);
+        DialogText.text = phrase;
+        yield return new WaitForSeconds(duration);
+        DialogBox.SetActive(false);
+    }
 
     public void AffichePrologue(string phrase)
     {
