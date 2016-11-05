@@ -44,7 +44,7 @@ public class InteractionHandler : MonoBehaviour {
                 switch (itemCollided.getName())
                 {
                     case ("Rocky"):
-                        //do something
+                        sound("RockyMusique");
                         break;
                 }
                 break;
@@ -75,9 +75,9 @@ public class InteractionHandler : MonoBehaviour {
         Destroy(target.gameObject);
     }
 
-    private void sound()
+    private void sound(string name)
     {
-        //launch sound
+        SoundManager.ChangeMusique(name);
     }
 
     public delegate void ChangeGaugeDelegate(int var);
