@@ -11,6 +11,7 @@ public class InteractionHandler : MonoBehaviour {
     void Start()
     {
         FindObjectOfType<UIManager>().findObjectsEvent += FindObjects;
+        FindObjectOfType<EventManager>().findObjectsEvent += FindObjects;
     }
 
     public void FindObjects()
@@ -31,7 +32,7 @@ public class InteractionHandler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
     private void SimpleInteraction(Object itemClicked)
@@ -44,26 +45,21 @@ public class InteractionHandler : MonoBehaviour {
                 printSentence("...Les émeutes grossissent et se multiplient...");
                 break;
             case ("fenetre"):
-                Debug.Log("fenetre");
                 printSentence("Je ferai mieux de ne pas me montrer c'est trop dangereux.");
                 break;
             case ("PorteDehors"):
-                Debug.Log("PorteDehors");
                 printSentence("Mauvaise idée, je n'ai pas envie de me retrouver avec un zombie...");
                 break;
             case ("PorteRemise"):
-                Debug.Log("PorteRemise");
                 printSentence("Ah c'est fermé...");
                 break;
             case ("Barricade"):
                 printSentence("Oh non ! Je dois rapidement trouver de quoi renforcer ma barricade !");
                 break;
             case ("Robinet"):
-                Debug.Log("Robinet");
                 printSentence("J'ai toujours de l'eau mais il me faudrait un récipient.");
                 break;
             case ("Chat"):
-                Debug.Log("Chat");
                 printSentence("Où étais-tu passé ?");
                 soundBruit("miaou");
                 break;
@@ -100,13 +96,12 @@ public class InteractionHandler : MonoBehaviour {
                 switch (itemDroppedOn.getName())
                 {
                     case ("PorteDehors"):
-                        Debug.Log("Chaise sur Porte");
-                        Debug.Log(itemDroppedOn.transform.position);
-                        Debug.Log(itemDragged.getName());
                         setPosition(itemDroppedOn.transform.position, itemDragged);
-                        changeSprite(itemDragged, 1);
-                        AddDanger(-20);
                         printSentence("Ça devrait suffire à les retenir...");
+                        AddDanger(-20);
+                        changeSprite(itemDragged, 1);
+
+
                         break;
                     default:
                         printSentence("Rien ne se passe...");
@@ -117,7 +112,6 @@ public class InteractionHandler : MonoBehaviour {
                 switch (itemDroppedOn.getName())
                 {
                     case ("Robinet"):
-                        Debug.Log("Bouteille sur Robinet");
                         changeSprite(itemDragged, 1);
                         printSentence("Au moins je n'aurai pas de problème de soif.");
                         break;
@@ -182,7 +176,6 @@ public class InteractionHandler : MonoBehaviour {
 
     private void printSentence(string sentenceToPrint)
     {
-        Debug.Log(sentenceToPrint);
         uiManager.Dialog(sentenceToPrint, 5.0f);
     }
 
