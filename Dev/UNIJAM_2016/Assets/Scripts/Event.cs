@@ -21,7 +21,12 @@ public class Event : MonoBehaviour {
 
     public void writeDialogue(string phrase)
     {
+        print("demande à l'UI d'afficher du texte");
+    }
 
+    public void launch()
+    {
+        print("lancement de l'event");
     }
 
 	// Use this for initialization
