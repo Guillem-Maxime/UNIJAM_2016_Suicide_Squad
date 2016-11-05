@@ -76,7 +76,7 @@ public class DaysManager : MonoBehaviour {
         }
     }
 
-    public void FirstDay()
+    public void FirstDay(bool gameJustStarted = false)
     {
         SoundManager.PlayMusique("saddest");
         mDay = 0;
@@ -95,5 +95,10 @@ public class DaysManager : MonoBehaviour {
         }
         eventManager.BuildActions();
         eventManager.ResetEvents();
+    }
+
+    public void GameStart()
+    {
+
     }
 }
