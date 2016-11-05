@@ -28,7 +28,10 @@ public class InteractionHandler : MonoBehaviour {
         switch (itemClicked.getName())
         {
             case ("Radio"):
-                printSentence("Sad Piano");
+                soundBruit("radio1");
+                printSentence("...Les forces de l'ordre tentent toujours de...");
+                soundBruit("radio1");
+                printSentence("...Les émeutes grossissent et se multiplient...");
                 break;
             case ("fenetre"):
                 printSentence("Je ferai mieux de ne pas me montrer c'est trop dangereux.");
@@ -47,7 +50,7 @@ public class InteractionHandler : MonoBehaviour {
                 break;
             case ("Chat"):
                 printSentence("Où étais-tu passé ?");
-                soundBruit("Miaulement");
+                soundBruit("miaou");
                 break;
             case ("Tiroir"):
                 changeSprite(itemClicked, 1);
