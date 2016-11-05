@@ -5,7 +5,7 @@ using System.Collections;
 
 public class InteractionHandler : MonoBehaviour {
 
-    //private UIManager uiManager;
+    private UIManager uiManager;
 
     // Use this for initialization
     void Start()
@@ -15,7 +15,7 @@ public class InteractionHandler : MonoBehaviour {
 
     public void FindObjects()
     {
-        // uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         foreach (DropHandler dropHandler in FindObjectsOfType<DropHandler>())
         {
             dropHandler.dropEvent += DoubleInteraction;
@@ -184,7 +184,7 @@ public class InteractionHandler : MonoBehaviour {
     private void printSentence(string sentenceToPrint)
     {
         Debug.Log(sentenceToPrint);
-        //uiManager.Dialog(sentenceToPrint, 5.0f);
+        uiManager.Dialog(sentenceToPrint, 5.0f);
     }
 
     private void destroyItem(Object target)
