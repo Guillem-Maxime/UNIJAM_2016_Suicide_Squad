@@ -18,7 +18,6 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("OnBeginDrag");
         itemBeingDragged = gameObject.GetComponent<Object>();
         startPosition = transform.position;
     }
@@ -29,7 +28,6 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("OnDrag");
         Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         newPosition.z = 0;
         transform.position = newPosition;
@@ -41,7 +39,6 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag");
         itemBeingDragged = null;
         transform.position = startPosition;
 
@@ -51,8 +48,13 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.GetComponent<Object>().getTag() == "interactable")
+
+        Debug.Log("Collide on Drop");
+
+        if (coll.gameObject.GetComponent<Object>().getTag() == "interact")
         {
+            Debug.Log("Collide on Interact");
+
             Object itemCollided = coll.gameObject.GetComponent<Object>();
 
             if (CollisionEvent != null)

@@ -16,25 +16,47 @@ public class InteractionHandler : MonoBehaviour {
 
     private void Interaction(Object itemDragged, Object itemCollided)
     {
-        /*
+        
         switch (itemDragged.getName())
         {
             case ("Gloves"):
-                //do something
+                switch (itemCollided.getName())
+                {
+                    case ("Rocky"):
+                        changeSprite(itemCollided, 1);
+                        break;
+                }
+
                 break;
             case ("Apollo Creed"):
-                //do something
+                switch (itemCollided.getName())
+                {
+                    case ("Rocky"):
+                        printSentence("You Win ! ");
+                        destroyItem(itemDragged);
+                        break;
+                }
                 break;
             case ("Stairs"):
-                //do something
+                switch (itemCollided.getName())
+                {
+                    case ("Rocky"):
+                        //do something
+                        break;
+                }
                 break;
             case ("Adrienne"):
-                printSentence("AAADDDRRRRIIIIIEEEEEENNNNNNNEEEEEE !!!");
+                switch (itemCollided.getName())
+                {
+                    case ("Rocky"):
+                        printSentence("AAADDDRRRRIIIIIEEEEEENNNNNNNEEEEEE !!!");
+                        break;
+                }
                 break;
             default:
                 //no interaction
                 break;
-        }*/
+        }
     }
 
 
