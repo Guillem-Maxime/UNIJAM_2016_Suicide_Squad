@@ -142,7 +142,7 @@ public class EventManager : MonoBehaviour {
     public void ActionOne0()
     {
         Debug.Log("la barricade se détériore");
-        uiManager.Dialog("NON! Ma barricade !", 5.0f);
+        uiManager.Dialog("Oh non! Je dois rapidement trouver de quoi renforcer\r\n ma barricade !", 5.0f);
         gaugeManager.AddDanger(20);
     }
 
