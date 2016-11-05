@@ -208,7 +208,7 @@ public class SoundManager : Singleton<SoundManager>
     /// Joue un son sur la piste de musique
     /// </summary>
     /// <param name="name">Nom de la musique à jouer</param>
-    private static void PlayMusique(string name)
+    public static void PlayMusique(string name)
     {
         Instance.InstancePlayMusique(name);
     }

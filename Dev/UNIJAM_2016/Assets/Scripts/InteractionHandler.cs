@@ -27,6 +27,7 @@ public class InteractionHandler : MonoBehaviour {
                 {
                     case ("Rocky"):
                         changeSprite(itemCollided, 1);
+                        sound("RockyMusique");
                         break;
                 }
 
@@ -37,14 +38,6 @@ public class InteractionHandler : MonoBehaviour {
                     case ("Rocky"):
                         printSentence("You Win ! ");
                         destroyItem(itemDragged);
-                        break;
-                }
-                break;
-            case ("Stairs"):
-                switch (itemCollided.getName())
-                {
-                    case ("Rocky"):
-                        sound("RockyMusique");
                         break;
                 }
                 break;
@@ -77,7 +70,7 @@ public class InteractionHandler : MonoBehaviour {
 
     private void sound(string name)
     {
-        SoundManager.ChangeMusique(name);
+        SoundManager.PlayMusique(name);
     }
 
     public delegate void ChangeGaugeDelegate(int var);
