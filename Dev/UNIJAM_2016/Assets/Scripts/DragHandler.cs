@@ -1,10 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 using System.Collections;
+
+
 
 public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
 
-    public static GameObject itemBeingDragged;
+    public delegate void CollisionDelegate(Object itemBeingDragged, Object itemCollided);
+
+    public event CollisionDelegate CollisionEvent;
+
+    public static Object itemBeingDragged;
     private Vector3 startPosition;
 
     #region IBeginDragHandler implementation
@@ -12,7 +19,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("OnBeginDrag");
-        itemBeingDragged = gameObject;
+        itemBeingDragged = gameObject.GetComponent<Object>();
         startPosition = transform.position;
     }
 
@@ -41,4 +48,20 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     }
 
     #endregion
+
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.gameObject.tag == "interactable")
+        {
+            Object itemCollided = coll.gameObject.GetComponent<Object>();
+
+            if (CollisionEvent != null)
+            {
+                CollisionEvent(itemBeingDragged, itemCollided);
+            }
+        }
+
+    }
+
+
 }
