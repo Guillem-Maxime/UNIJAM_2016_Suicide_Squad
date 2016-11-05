@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\GaugeManager.cs" />
     <Compile Include="Assets\Scripts\Object.cs" />
     <Compile Include="Assets\Scripts\ObjectManager.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Singleton.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />

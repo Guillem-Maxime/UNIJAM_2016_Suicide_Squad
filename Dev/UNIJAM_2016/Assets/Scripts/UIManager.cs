@@ -5,21 +5,41 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
 
 
-    Text superbetexte;
+    public GameObject menu;
+    public GameObject game;
 
-    public void write(string phrase)
-    {
-        superbetexte.text = phrase; 
-    }
+    public GameObject prologue;
+    public Text prologueText;
+    float prologueDuration = 10.0f;
 
-	// Use this for initialization
+    public GameObject bedroom;
 
     void Start () {
 	
 	}
 	
-	// Update is called once per frame
+
 	void Update () {
 	
 	}
+
+    public void AffichePrologue(string phrase)
+    {
+        prologueText.text = phrase;
+        StartCoroutine(PrologueCoroutine());
+    }
+
+    private IEnumerator PrologueCoroutine()
+    {
+        bedroom.SetActive(false);
+        prologue.SetActive(true);
+        yield return new WaitForSeconds(prologueDuration);
+        prologue.SetActive(false);
+        bedroom.SetActive(true);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
