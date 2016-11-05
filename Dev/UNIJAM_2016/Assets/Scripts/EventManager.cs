@@ -94,7 +94,19 @@ public class EventManager : MonoBehaviour {
           for (int i = 0; i < nbEventDay7; i++)
           {
               eDaySeven[i] = eventDayOneTabObjects[i].GetComponent<Event>();
-          } */
+          }
+          
+         GameObject[] eventDayEightTabObjects = GameObject.FindGameObjectsWithTag("EventDay8");
+          for (int i = 0; i < nbEventDay8; i++)
+          {
+              eDayEight[i] = eventDayOneTabObjects[i].GetComponent<Event>();
+          }
+          
+         GameObject[] eventDayNineTabObjects = GameObject.FindGameObjectsWithTag("EventDay9");
+          for (int i = 0; i < nbEventDay9; i++)
+          {
+              eDayNine[i] = eventDayOneTabObjects[i].GetComponent<Event>();
+          }*/
     }
 
     // Use this for initialization

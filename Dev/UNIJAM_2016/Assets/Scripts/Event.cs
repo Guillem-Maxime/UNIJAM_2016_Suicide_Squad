@@ -3,11 +3,17 @@ using System.Collections;
 
 public class Event : MonoBehaviour {
 
-    private string title; 
-
     private float time;
 
     public float Time
+    {
+        get;
+        set;
+    }
+
+    private bool aEteLance = false; 
+
+    public bool AEteLance
     {
         get;
         set;
