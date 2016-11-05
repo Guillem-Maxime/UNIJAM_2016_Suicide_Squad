@@ -15,7 +15,11 @@ public class DaysManager : MonoBehaviour {
 
 	void Start () {
         timerTab = new Timer[nmbDayMAX];
-
+        GameObject[] timerTabObjects = GameObject.FindGameObjectsWithTag("Timer");
+        for (int i = 0; i < nmbDayMAX; i++)
+        {
+            timerTab[i] = timerTabObjects[i].GetComponent<Timer>();
+        }
 
         prologueTab = new String[nmbDayMAX];
         prologueTab[0] = "On n'ose jamais mourir.\r\n On ose tenir à la vie.\r\n lol.";
@@ -33,19 +37,19 @@ public class DaysManager : MonoBehaviour {
     }
 	
 	void Update () {
-        /*
+        
         if  (timerTab[mDay].Get() > timeMaxPerDay)
         {
             NextDay();
         }
         else
         {
-            for (tous les events du jour n° mDay pas encore lancés) {
+            /*for (tous les events du jour n° mDay pas encore lancés) {
                 if (timerTab[mDay].Get() > eventmanager.get(i).time) {
                     eventmanager.get(i).launch();
                 }
-            }
-        }*/
+            }*/
+        }
     }
 
     public void NextDay()
@@ -68,6 +72,6 @@ public class DaysManager : MonoBehaviour {
     {
         mDay = 0;
         uiManager.AffichePrologue(prologueTab[mDay]);
-        //timerTab[mDay].LetsStart();
+        timerTab[mDay].LetsStart();
     }
 }
