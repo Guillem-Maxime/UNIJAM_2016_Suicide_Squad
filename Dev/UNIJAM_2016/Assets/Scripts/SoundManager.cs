@@ -31,6 +31,8 @@ public class SoundManager : Singleton<SoundManager>
     //********Musiques********
     //************************
 
+    public AudioClip saddest;
+
     //************************
     //********Bruitages*******
     //************************
@@ -213,7 +215,7 @@ public class SoundManager : Singleton<SoundManager>
     /// Joue un son sur la piste de musique
     /// </summary>
     /// <param name="name">Nom de la musique à jouer</param>
-    private static void PlayMusique(string name)
+    public static void PlayMusique(string name)
     {
         Instance.InstancePlayMusique(name);
     }
@@ -226,7 +228,13 @@ public class SoundManager : Singleton<SoundManager>
         source.Stop();
         AudioClip originalClip = null;
         //TODO ajouter un swich pour chaque musique
-        source.clip = originalClip;
+        switch (name)
+        {
+            case "saddest":
+                originalClip = saddest;
+                break;
+        }
+                source.clip = originalClip;
         source.Play();
     }
 }

@@ -19,8 +19,8 @@ public class EventManager : MonoBehaviour {
     //private Event[] eDayEight;
 
     private int nbEventDay1 = 4;
-    private int nbEventDay2 = 0;
-    private int nbEventDay3 = 0;
+    private int nbEventDay2 = 1;
+    private int nbEventDay3 = 3;
     //private int nbEventDay4 = 0;
     //private int nbEventDay5 = 0;
     //private int nbEventDay6 = 0;
@@ -28,6 +28,8 @@ public class EventManager : MonoBehaviour {
     //private int nbEventDay8 = 0;
 
     GameObject[] eventDayOneTabObjects;
+    GameObject[] eventDayTwoTabObjects;
+    GameObject[] eventDayThreeTabObjects;
 
     void Start()
     {
@@ -74,19 +76,18 @@ public class EventManager : MonoBehaviour {
         {
             eDayOne[i] = eventDayOneTabObjects[i].GetComponent<Event>();
         }
+        GameObject[] eventDayTwoTabObjects = GameObject.FindGameObjectsWithTag("EventDay2");
+        for (int i = 0; i < nbEventDay2; i++)
+        {
+            eDayTwo[i] = eventDayTwoTabObjects[i].GetComponent<Event>();
+        }
         /*
-          GameObject[] eventDayTwoTabObjects = GameObject.FindGameObjectsWithTag("EventDay2");
-          for (int i = 0; i < nbEventDay2; i++)
-          {
-              eDayTwo[i] = eventDayTwoTabObjects[i].GetComponent<Event>();
-          }
-
-          GameObject[] eventDayThreeTabObjects = GameObject.FindGameObjectsWithTag("EventDay3");
-          for (int i = 0; i < nbEventDay1; i++)
-          {
-              eDayThree[i] = eventDayThreeTabObjects[i].GetComponent<Event>();
-          }
-
+        GameObject[] eventDayThreeTabObjects = GameObject.FindGameObjectsWithTag("EventDay3");
+        for (int i = 0; i < nbEventDay3; i++)
+        {
+            eDayThree[i] = eventDayThreeTabObjects[i].GetComponent<Event>();
+        }
+/*
           GameObject[] eventDayFourTabObjects = GameObject.FindGameObjectsWithTag("EventDay4");
           for (int i = 0; i < nbEventDay4; i++)
           {
@@ -137,33 +138,48 @@ public class EventManager : MonoBehaviour {
 
         eDayOne[3].Time = 140.0f;
         eDayOne[3].action = () => ActionOne3();
+
+        eDayTwo[0].Time = 0.01f;
+        eDayTwo[0].action = () => ActionTwo0();
+
+        /*eDayThree[0].Time = 45.0f;
+        eDayThree[0].action = () => ActionOne0();
+
+        eDayThree[1].Time = 20.0f;
+        eDayThree[1].action = () => ActionOne1();
+
+        eDayThree[2].Time = 110.0f;
+        eDayThree[2].action = () => ActionOne2();*/
+
+
     }
 
     public void ActionOne0()
     {
-        Debug.Log("la barricade se détériore");
         uiManager.Dialog("Oh non! Je dois rapidement trouver de quoi renforcer\r\n ma barricade !", 5.0f);
         gaugeManager.AddDanger(20);
     }
 
     public void ActionOne1()
     {
-        Debug.Log("la radio émet du grésillement");
         uiManager.Dialog("*grésillement* Aujourd'hui, le temps sera pluvieux sur tout le pays.\r\n Le vent sera fort et des *grésillements* nous vous conseillons de \r\n rester chez vous !", 15.0f);
         SoundManager.PlayBruitage("radio1");
     }
 
     public void ActionOne2()
     {
-        Debug.Log("miaulement venant de la réserve");
         uiManager.Dialog("Qu'est-ce que c'est que ça ?", 5.0f);
         SoundManager.PlayBruitage("miaou");
     }
 
     public void ActionOne3()
     {
-        Debug.Log("arrivée du chat");
         uiManager.Dialog("Salut toi ! Qu'est-ce que tu faisais là-dedans ?", 5.0f);
+    }
+
+    public void ActionTwo0()
+    {
+        uiManager.Dialog("Laisse-moi !", 5.0f);
     }
 
     public void ResetEvents()
@@ -171,6 +187,10 @@ public class EventManager : MonoBehaviour {
         for (int i = 0; i < eDayOne.Length; i++)
         {
             eDayOne[i].AEteLance = false;
+        }
+        for (int i = 0; i < eDayTwo.Length; i++)
+        {
+            eDayTwo[i].AEteLance = false;
         }
     }
 }

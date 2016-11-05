@@ -78,6 +78,7 @@ public class DaysManager : MonoBehaviour {
 
     public void FirstDay()
     {
+        SoundManager.PlayMusique("saddest");
         mDay = 0;
         uiManager.AffichePrologue(prologueTab[mDay]);
         timerTab[mDay].Set(-uiManager.prologueDuration);
