@@ -20,6 +20,10 @@ public class UIManager : MonoBehaviour {
     public GameObject DialogBox;
     public Text DialogText;
 
+    public SpriteRenderer INTRO;
+    public Sprite blackSprite;
+    public Sprite introSprite; 
+
     void Start () {
         daysManager = GameObject.FindGameObjectWithTag("DaysManager").GetComponent<DaysManager>();
 	}
@@ -69,7 +73,15 @@ public class UIManager : MonoBehaviour {
         for (int i = 0; i < n; i++)
         {
             prologueText.text = phrases[i];
+            if (i == n - 1)
+            {
+                INTRO.sprite = introSprite;
+            }
             yield return new WaitForSeconds(prologueDuration);
+            if (i == n - 1)
+            {
+                INTRO.sprite = blackSprite;
+            }
         }
         yield return new WaitForSeconds(prologueDuration);
         prologue.SetActive(false);
