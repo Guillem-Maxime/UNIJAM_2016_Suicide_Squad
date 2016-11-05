@@ -13,15 +13,12 @@ public class DaysManager : MonoBehaviour {
     UIManager uiManager;
     
 
-	// Use this for initialization
 	void Start () {
         timerTab = new Timer[nmbDayMAX];
         prologueTab = new String[nmbDayMAX];
         //eventManager = GameObject.FindGameObjectWithTag("EventManager");
-
 	}
 	
-	// Update is called once per frame
 	void Update () {
 	    
         if  (timerTab[mDay].Get() > timeMaxPerDay)
@@ -51,6 +48,7 @@ public class DaysManager : MonoBehaviour {
 
     public void FirstDay()
     {
+        mDay = 0;
         //uiManager.AffichePrologue(prologueTab[mDay]);
         timerTab[mDay].LetsStart();
     }
