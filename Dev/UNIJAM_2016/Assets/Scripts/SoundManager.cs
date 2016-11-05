@@ -37,7 +37,8 @@ public class SoundManager : Singleton<SoundManager>
     /// <summary>
     /// Lien vers le bruitage du logo
     /// </summary>
-    //public AudioClip bruitageLogo;
+    public AudioClip radio1;
+    public AudioClip miaou;
 
 
     /// <summary>
@@ -114,12 +115,15 @@ public class SoundManager : Singleton<SoundManager>
     {
         AudioClip originalClip;
         originalClip = null;
-        /*switch (name)
+        switch (name)
         {
-            case "Logo":
-                originalClip = bruitageLogo;
+            case "radio1":
+                originalClip = radio1;
                 break;
-        }*/
+            case "miaou":
+                originalClip = miaou;
+                break;
+        }
         sourceBruitage.PlayOneShot(originalClip);
     }
 
@@ -171,7 +175,8 @@ public class SoundManager : Singleton<SoundManager>
                 source.volume = tmp * i * 0.2f;
                 yield return new WaitForSeconds(0.1f);
             }
-            source.volume = 0.5f; //OptionFileManager.GetVolume()/100f;
+            //source.volume = OptionFileManager.GetVolume() / 100f;
+            source.volume = 0.5f;
         }
     }
 

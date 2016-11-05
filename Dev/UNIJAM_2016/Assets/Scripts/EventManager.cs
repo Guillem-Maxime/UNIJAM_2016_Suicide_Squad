@@ -149,14 +149,15 @@ public class EventManager : MonoBehaviour {
     public void ActionOne1()
     {
         Debug.Log("la radio émet du grésillement");
-        uiManager.Dialog("*grésillement* Aujourd'hui, le temps sera pluvieux sur tout le pays.\r\n Le vent sera fort et des *grésillements* nous vous conseillons de \r\n rester chez vous !", 5.0f);
-        SoundManager.PlayBruitage("Sounds/Bruitages/Porte");
+        uiManager.Dialog("*grésillement* Aujourd'hui, le temps sera pluvieux sur tout le pays.\r\n Le vent sera fort et des *grésillements* nous vous conseillons de \r\n rester chez vous !", 15.0f);
+        SoundManager.PlayBruitage("radio1");
     }
 
     public void ActionOne2()
     {
         Debug.Log("miaulement venant de la réserve");
         uiManager.Dialog("Qu'est-ce que c'est que ça ?", 5.0f);
+        SoundManager.PlayBruitage("miaou");
     }
 
     public void ActionOne3()

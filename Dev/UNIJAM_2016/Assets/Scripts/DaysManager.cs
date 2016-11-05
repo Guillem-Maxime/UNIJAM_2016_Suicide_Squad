@@ -45,7 +45,6 @@ public class DaysManager : MonoBehaviour {
         else
         {
             for (int i = 0; i < eventManager.eventsOfDays[mDay].Length; i++) {
-                Debug.Log(eventManager.eventsOfDays[mDay][i].AEteLance);
                 if (timerTab[mDay].Get() > eventManager.eventsOfDays[mDay][i].Time && !(eventManager.eventsOfDays[mDay][i].AEteLance))
                 {
                     eventManager.eventsOfDays[mDay][i].launch();
