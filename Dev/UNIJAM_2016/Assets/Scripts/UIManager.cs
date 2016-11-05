@@ -22,7 +22,10 @@ public class UIManager : MonoBehaviour {
 
     public SpriteRenderer INTRO;
     public Sprite blackSprite;
-    public Sprite introSprite; 
+    public Sprite introSprite;
+
+    public delegate void FindObjectsDelegate();
+    public event FindObjectsDelegate findObjectsEvent;
 
     void Start () {
         daysManager = GameObject.FindGameObjectWithTag("DaysManager").GetComponent<DaysManager>();
@@ -66,6 +69,8 @@ public class UIManager : MonoBehaviour {
         bedroom.SetActive(true);
     }
 
+
+
     private IEnumerator MultipleCoroutine(string[] phrases, int n, float prologueDuration)
     {
         bedroom.SetActive(false);
@@ -86,6 +91,10 @@ public class UIManager : MonoBehaviour {
         yield return new WaitForSeconds(prologueDuration);
         prologue.SetActive(false);
         bedroom.SetActive(true);
+        if(findObjectsEvent != null)
+        {
+            findObjectsEvent();
+        }
     }
 
     public void Quit()

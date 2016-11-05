@@ -10,7 +10,7 @@ public class InteractionHandler : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-
+        FindObjectOfType<UIManager>().findObjectsEvent += FindObjects;
     }
 
     public void FindObjects()
@@ -41,7 +41,6 @@ public class InteractionHandler : MonoBehaviour {
             case ("Radio"):
                 soundBruit("radio1");
                 printSentence("...Les forces de l'ordre tentent toujours de...");
-                soundBruit("radio1");
                 printSentence("...Les émeutes grossissent et se multiplient...");
                 break;
             case ("fenetre"):
