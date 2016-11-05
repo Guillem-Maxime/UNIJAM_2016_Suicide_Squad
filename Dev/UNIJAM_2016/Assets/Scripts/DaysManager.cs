@@ -11,6 +11,10 @@ public class DaysManager : MonoBehaviour {
     String[] prologueTab;
     EventManager eventManager;
     UIManager uiManager;
+
+    public SpriteRenderer lumieresRenderer;
+    public Sprite lumieresOn;
+    public Sprite lumieresOff;
     
 
 	void Start () {
@@ -22,7 +26,7 @@ public class DaysManager : MonoBehaviour {
         }
 
         prologueTab = new String[nmbDayMAX];
-        prologueTab[0] = "On n'ose jamais mourir.\r\n On ose tenir à la vie.\r\n Eh oui!";
+        prologueTab[0] = "Aujourd'hui, rien ne va plus. Le monde est trop dangereux, des zombies partout... \r\n Je dois rester chez moi. Les murs sont froids, je me sens partir un peu plus chaque jour.\r\n Combien de temps vais-je tenir ?";
         prologueTab[1] = "Je suis le texte du deuxième jour";
         prologueTab[2] = "Je suis le texte du troisième jour";
         prologueTab[3] = "Je suis le texte du cinquième jour.\r\n Non, j'ai menti.";
@@ -34,6 +38,7 @@ public class DaysManager : MonoBehaviour {
         
         eventManager = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>();
         uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        lumieresRenderer.sprite = lumieresOff;
     }
 	
 	void Update () {
@@ -45,9 +50,10 @@ public class DaysManager : MonoBehaviour {
         else
         {
             for (int i = 0; i < eventManager.eventsOfDays[mDay].Length; i++) {
-                if (timerTab[mDay].Get() > eventManager.eventsOfDays[mDay][i].Time)
+                if (timerTab[mDay].Get() > eventManager.eventsOfDays[mDay][i].Time && !(eventManager.eventsOfDays[mDay][i].AEteLance))
                 {
                     eventManager.eventsOfDays[mDay][i].launch();
+                    eventManager.eventsOfDays[mDay][i].AEteLance = true;
                 }
             }
         }
@@ -76,5 +82,17 @@ public class DaysManager : MonoBehaviour {
         uiManager.AffichePrologue(prologueTab[mDay]);
         timerTab[mDay].Set(-uiManager.prologueDuration);
         timerTab[mDay].LetsStart();
+        lumieresRenderer.sprite = lumieresOn;
+    }
+
+    public void ResetAllTimers()
+    {
+        for (int i = 0; i < timerTab.Length; i++)
+        {
+            timerTab[i].Stop();
+            timerTab[i].Reset();
+        }
+        eventManager.BuildActions();
+        eventManager.ResetEvents();
     }
 }

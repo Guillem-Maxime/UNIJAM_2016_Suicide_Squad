@@ -1,47 +1,47 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 
-public class Object : MonoBehaviour {
 
-    private Ray ray;
-    private RaycastHit hit;
+public class Object : MonoBehaviour{
 
-    private Vector3 initialPosition;
+    [SerializeField]
+    private string nameObject;
+    public string getName() { return nameObject; }
+    //[SerializeField]
+<<<<<<< HEAD
+    //private bool isInterractive;
+    //public bool getInterraction() { return isInterractive; }
+=======
+    //private string tagObject;
+    //public string getTag() { return tagObject; }
+>>>>>>> 447499da4381c5027331a4b9e42f285bbc8cb580
 
-    public Vector3 getInitialPosition()
-    {
-        return initialPosition;
-    }
+    [SerializeField]
+    public List<Sprite> spriteList;
 
-    public LayerMask interactions;
+    private bool isDragged;
 
 	// Use this for initialization
 	void Start () {
-        initialPosition = new Vector3(0, 0, 0);
-        this.transform.position = initialPosition;
+        if(spriteList.Count == 0)
+        {
+            spriteList.Add(this.gameObject.GetComponent<Image>().sprite);
+        }
+        else
+        {
+            spriteList[0] = this.gameObject.GetComponent<Image>().sprite;
+        }
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-        Debug.Log(Input.mousePosition);
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        }
-        if (Physics.Raycast(ray, out hit, 50f))
-        {
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
-                Debug.Log(Input.mousePosition);
-                this.transform.position = Input.mousePosition;
-            }else if(Input.GetKeyUp(KeyCode.Mouse0))
-            {
-                this.transform.position = initialPosition;
-            }
-        }
+        
+        
     }
+
 
 }

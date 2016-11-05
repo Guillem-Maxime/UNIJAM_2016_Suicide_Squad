@@ -6,6 +6,8 @@ public class GaugeManager : MonoBehaviour {
 
     UIManager uiManager;
 
+
+
     int dangerMAX = 100;
     int danger;
     int fatigueMAX = 100;
@@ -20,7 +22,9 @@ public class GaugeManager : MonoBehaviour {
         uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         danger = dangerMAX / 2;
         fatigue = fatigueMAX / 2;
-	}
+        //FindObjectOfType<InteractionHandler>().ChangeDangerEvent += AddDanger;
+        //FindObjectOfType<InteractionHandler>().ChangeFatigueEvent += AddFatigue;
+    }
 	
 	void Update () {
 	    if (danger == 100 || fatigue == 100)

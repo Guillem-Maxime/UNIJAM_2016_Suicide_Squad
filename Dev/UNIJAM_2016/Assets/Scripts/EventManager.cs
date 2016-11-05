@@ -4,40 +4,56 @@ using System.Collections.Generic;
 
 public class EventManager : MonoBehaviour {
 
+    UIManager uiManager;
+    GaugeManager gaugeManager;
+
     public Dictionary<int, Event[]> eventsOfDays;
 
     private Event[] eDayOne;
     private Event[] eDayTwo;
     private Event[] eDayThree;
-    private Event[] eDayFour;
-    private Event[] eDayFive;
-    private Event[] eDaySix;
-    private Event[] eDaySeven;
-    private Event[] eDayEight;
-    private Event[] eDayNine;
+    //private Event[] eDayFour;
+    //private Event[] eDayFive;
+    //private Event[] eDaySix;
+    //private Event[] eDaySeven;
+    //private Event[] eDayEight;
 
-    private int nbEventDay1 = 0;
+    private int nbEventDay1 = 4;
     private int nbEventDay2 = 0;
     private int nbEventDay3 = 0;
-    private int nbEventDay4 = 0;
-    private int nbEventDay5 = 0;
-    private int nbEventDay6 = 0;
-    private int nbEventDay7 = 0;
-    private int nbEventDay8 = 0;
-    private int nbEventDay9 = 0;
+    //private int nbEventDay4 = 0;
+    //private int nbEventDay5 = 0;
+    //private int nbEventDay6 = 0;
+    //private int nbEventDay7 = 0;
+    //private int nbEventDay8 = 0;
 
+    GameObject[] eventDayOneTabObjects;
+
+    void Start()
+    {
+        uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        gaugeManager = GameObject.FindGameObjectWithTag("GaugeManager").GetComponent<GaugeManager>();
+        eventsOfDays = new Dictionary<int, Event[]>();
+        initiateDays();
+        initiateEventsOfDays();
+        BuildActions();
+    }
+
+    void Update()
+    {
+
+    }
 
     public void initiateEventsOfDays()
     {
         eventsOfDays.Add(0, eDayOne);
         eventsOfDays.Add(1, eDayTwo);
         eventsOfDays.Add(2, eDayThree);
-        eventsOfDays.Add(3, eDayFour);
-        eventsOfDays.Add(4, eDayFive);
-        eventsOfDays.Add(5, eDaySix);
-        eventsOfDays.Add(6, eDaySeven);
-        eventsOfDays.Add(7, eDayEight);
-        eventsOfDays.Add(8, eDayNine);
+        //eventsOfDays.Add(3, eDayFour);
+        //eventsOfDays.Add(4, eDayFive);
+        //eventsOfDays.Add(5, eDaySix);
+        //eventsOfDays.Add(6, eDaySeven);
+        //eventsOfDays.Add(7, eDayEight);
 
     }
 
@@ -46,20 +62,19 @@ public class EventManager : MonoBehaviour {
         eDayOne = new Event[nbEventDay1];
         eDayTwo = new Event[nbEventDay2];
         eDayThree = new Event[nbEventDay3];
-        eDayFour = new Event[nbEventDay4];
-        eDayFive = new Event[nbEventDay5];
-        eDaySix = new Event[nbEventDay6];
-        eDaySeven = new Event[nbEventDay7];
-        eDayEight = new Event[nbEventDay8];
-        eDayNine = new Event[nbEventDay9];
+        //eDayFour = new Event[nbEventDay4];
+        //eDayFive = new Event[nbEventDay5];
+        //eDaySix = new Event[nbEventDay6];
+        //eDaySeven = new Event[nbEventDay7];
+        //eDayEight = new Event[nbEventDay8];
 
 
-        /*  GameObject[] eventDayOneTabObjects = GameObject.FindGameObjectsWithTag("EventDay1");
-          for (int i = 0; i < nbEventDay1; i++)
-          {
-              eDayOne[i] = eventDayOneTabObjects[i].GetComponent<Event>();
-          }
-
+        eventDayOneTabObjects = GameObject.FindGameObjectsWithTag("EventDay1");
+        for (int i = 0; i < nbEventDay1; i++)
+        {
+            eDayOne[i] = eventDayOneTabObjects[i].GetComponent<Event>();
+        }
+        /*
           GameObject[] eventDayTwoTabObjects = GameObject.FindGameObjectsWithTag("EventDay2");
           for (int i = 0; i < nbEventDay2; i++)
           {
@@ -94,19 +109,68 @@ public class EventManager : MonoBehaviour {
           for (int i = 0; i < nbEventDay7; i++)
           {
               eDaySeven[i] = eventDayOneTabObjects[i].GetComponent<Event>();
-          } */
+          }
+          
+         GameObject[] eventDayEightTabObjects = GameObject.FindGameObjectsWithTag("EventDay8");
+          for (int i = 0; i < nbEventDay8; i++)
+          {
+              eDayEight[i] = eventDayOneTabObjects[i].GetComponent<Event>();
+          }
+          
+         GameObject[] eventDayNineTabObjects = GameObject.FindGameObjectsWithTag("EventDay9");
+          for (int i = 0; i < nbEventDay9; i++)
+          {
+              eDayNine[i] = eventDayOneTabObjects[i].GetComponent<Event>();
+          }*/
     }
 
-    // Use this for initialization
+    public void BuildActions()
+    {
+        eDayOne[0].Time = 45.0f;
+        eDayOne[0].action = () => ActionOne0();
 
-    void Start () {
-        eventsOfDays = new Dictionary<int, Event[]>();
-        initiateDays();
-        initiateEventsOfDays();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+        eDayOne[1].Time = 20.0f;
+        eDayOne[1].action = () => ActionOne1();
+
+        eDayOne[2].Time = 110.0f;
+        eDayOne[2].action = () => ActionOne2();
+
+        eDayOne[3].Time = 140.0f;
+        eDayOne[3].action = () => ActionOne3();
+    }
+
+    public void ActionOne0()
+    {
+        Debug.Log("la barricade se détériore");
+        uiManager.Dialog("Oh non! Je dois rapidement trouver de quoi renforcer\r\n ma barricade !", 5.0f);
+        gaugeManager.AddDanger(20);
+    }
+
+    public void ActionOne1()
+    {
+        Debug.Log("la radio émet du grésillement");
+        uiManager.Dialog("*grésillement* Aujourd'hui, le temps sera pluvieux sur tout le pays.\r\n Le vent sera fort et des *grésillements* nous vous conseillons de \r\n rester chez vous !", 15.0f);
+        SoundManager.PlayBruitage("radio1");
+    }
+
+    public void ActionOne2()
+    {
+        Debug.Log("miaulement venant de la réserve");
+        uiManager.Dialog("Qu'est-ce que c'est que ça ?", 5.0f);
+        SoundManager.PlayBruitage("miaou");
+    }
+
+    public void ActionOne3()
+    {
+        Debug.Log("arrivée du chat");
+        uiManager.Dialog("Salut toi ! Qu'est-ce que tu faisais là-dedans ?", 5.0f);
+    }
+
+    public void ResetEvents()
+    {
+        for (int i = 0; i < eDayOne.Length; i++)
+        {
+            eDayOne[i].AEteLance = false;
+        }
+    }
 }
