@@ -5,17 +5,28 @@ using System.Collections;
 
 public class InteractionHandler : MonoBehaviour {
 
-    private UIManager uiManager;
+    //private UIManager uiManager;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
-        uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+
+    }
+
+    public void FindObjects()
+    {
+        // uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         foreach (DropHandler dropHandler in FindObjectsOfType<DropHandler>())
+        {
             dropHandler.dropEvent += DoubleInteraction;
+        }
+
 
         foreach (ClickHandler clickHandler in FindObjectsOfType<ClickHandler>())
+        {
             clickHandler.clickEvent += SimpleInteraction;
+        }
+
     }
 	
 	// Update is called once per frame
@@ -34,28 +45,33 @@ public class InteractionHandler : MonoBehaviour {
                 printSentence("...Les émeutes grossissent et se multiplient...");
                 break;
             case ("fenetre"):
+                Debug.Log("fenetre");
                 printSentence("Je ferai mieux de ne pas me montrer c'est trop dangereux.");
                 break;
             case ("PorteDehors"):
+                Debug.Log("PorteDehors");
                 printSentence("Mauvaise idée, je n'ai pas envie de me retrouver avec un zombie...");
                 break;
             case ("PorteRemise"):
+                Debug.Log("PorteRemise");
                 printSentence("Ah c'est fermé...");
                 break;
             case ("Barricade"):
                 printSentence("Oh non ! Je dois rapidement trouver de quoi renforcer ma barricade !");
                 break;
             case ("Robinet"):
+                Debug.Log("Robinet");
                 printSentence("J'ai toujours de l'eau mais il me faudrait un récipient.");
                 break;
             case ("Chat"):
+                Debug.Log("Chat");
                 printSentence("Où étais-tu passé ?");
                 soundBruit("miaou");
                 break;
             case ("Tiroir"):
                 changeSprite(itemClicked, 1);
                 itemClicked.gameObject.GetComponent<DragHandler>().setDraggable(false);
-                //Instanciate barre milka
+                CreateObjectDrag("barreMilka");
                 break;
             default:
                 printSentence("Rien ne se passe...");
@@ -84,7 +100,10 @@ public class InteractionHandler : MonoBehaviour {
             case ("Chaise"):
                 switch (itemDroppedOn.getName())
                 {
-                    case ("Porte"):
+                    case ("PorteDehors"):
+                        Debug.Log("Chaise sur Porte");
+                        Debug.Log(itemDroppedOn.transform.position);
+                        Debug.Log(itemDragged.getName());
                         setPosition(itemDroppedOn.transform.position, itemDragged);
                         changeSprite(itemDragged, 1);
                         AddDanger(-20);
@@ -99,6 +118,7 @@ public class InteractionHandler : MonoBehaviour {
                 switch (itemDroppedOn.getName())
                 {
                     case ("Robinet"):
+                        Debug.Log("Bouteille sur Robinet");
                         changeSprite(itemDragged, 1);
                         printSentence("Au moins je n'aurai pas de problème de soif.");
                         break;
@@ -122,7 +142,7 @@ public class InteractionHandler : MonoBehaviour {
                 {
                     case ("Rocky"):
                         changeSprite(itemDroppedOn, 1);
-                        soundMusique("RockyMusique");
+                        soundBruit("miaou");
                         break;
                     default:
                         printSentence("Rien ne se passe...");
@@ -164,8 +184,7 @@ public class InteractionHandler : MonoBehaviour {
     private void printSentence(string sentenceToPrint)
     {
         Debug.Log(sentenceToPrint);
-        uiManager.Dialog(sentenceToPrint, 5.0f);
-        //print sentence in UI
+        //uiManager.Dialog(sentenceToPrint, 5.0f);
     }
 
     private void destroyItem(Object target)
@@ -216,7 +235,7 @@ public class InteractionHandler : MonoBehaviour {
 
     private void setPosition(Vector3 newPosition, Object obj)
     {
-        obj.transform.position = newPosition;
+        obj.gameObject.GetComponent<DragHandler>().setFixPosition(newPosition);
     }
 
     private void changeCharacterSprite(Character character, int index)
@@ -224,9 +243,31 @@ public class InteractionHandler : MonoBehaviour {
         character.GetComponent<SpriteRenderer>().sprite = character.spriteList[index];
     }
     
-    private void InstanciateObject(Object objectToInstanciate)
+    private GameObject CreateObjectDrag(string name)
     {
-        //Object to Instanciate
+        GameObject result = new GameObject();
+        result.AddComponent<Object>();
+        result.AddComponent<DragHandler>();
+        result.GetComponent<Object>().setName(name);
+        return result;
+    }
+
+    private GameObject CreateObjectDrop(string name)
+    {
+        GameObject result = new GameObject();
+        result.AddComponent<Object>();
+        result.AddComponent<DropHandler>();
+        result.GetComponent<Object>().setName(name);
+        return result;
+    }
+
+    private GameObject CreateObjectClick(string name)
+    {
+        GameObject result = new GameObject();
+        result.AddComponent<Object>();
+        result.AddComponent<ClickHandler>();
+        result.GetComponent<Object>().setName(name);
+        return result;
     }
 
     private void GotAMatch()
@@ -237,5 +278,10 @@ public class InteractionHandler : MonoBehaviour {
     private void MayTheFourthBeWithYou()
     {
         //Big animation on fourth day
+    }
+
+    private void displayImage(string name)
+    {
+        //Display a big image
     }
 }
