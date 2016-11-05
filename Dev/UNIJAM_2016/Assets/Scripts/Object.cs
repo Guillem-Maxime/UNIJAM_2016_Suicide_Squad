@@ -11,8 +11,13 @@ public class Object : MonoBehaviour{
     private string nameObject;
     public string getName() { return nameObject; }
     //[SerializeField]
+<<<<<<< HEAD
     //private bool isInterractive;
     //public bool getInterraction() { return isInterractive; }
+=======
+    //private string tagObject;
+    //public string getTag() { return tagObject; }
+>>>>>>> 447499da4381c5027331a4b9e42f285bbc8cb580
 
     [SerializeField]
     public List<Sprite> spriteList;

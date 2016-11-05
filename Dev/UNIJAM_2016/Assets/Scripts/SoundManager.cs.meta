@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: cbb2d9632085df84289b4c143b804cad
-timeCreated: 1478305854
+timeCreated: 1478359523
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - radio1: {fileID: 8300000, guid: 04af3a3a2e03a7948b2c577ffffff6fb, type: 3}
+  - miaou: {fileID: 8300000, guid: 04af3a3a2e03a7948b2c577ffffff6fb, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

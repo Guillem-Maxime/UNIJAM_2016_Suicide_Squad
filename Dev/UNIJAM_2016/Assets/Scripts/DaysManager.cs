@@ -11,6 +11,10 @@ public class DaysManager : MonoBehaviour {
     String[] prologueTab;
     EventManager eventManager;
     UIManager uiManager;
+
+    public SpriteRenderer lumieresRenderer;
+    public Sprite lumieresOn;
+    public Sprite lumieresOff;
     
 
 	void Start () {
@@ -34,6 +38,7 @@ public class DaysManager : MonoBehaviour {
         
         eventManager = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>();
         uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        lumieresRenderer.sprite = lumieresOff;
     }
 	
 	void Update () {
@@ -45,7 +50,6 @@ public class DaysManager : MonoBehaviour {
         else
         {
             for (int i = 0; i < eventManager.eventsOfDays[mDay].Length; i++) {
-                Debug.Log(eventManager.eventsOfDays[mDay][i].AEteLance);
                 if (timerTab[mDay].Get() > eventManager.eventsOfDays[mDay][i].Time && !(eventManager.eventsOfDays[mDay][i].AEteLance))
                 {
                     eventManager.eventsOfDays[mDay][i].launch();
@@ -78,6 +82,7 @@ public class DaysManager : MonoBehaviour {
         uiManager.AffichePrologue(prologueTab[mDay]);
         timerTab[mDay].Set(-uiManager.prologueDuration);
         timerTab[mDay].LetsStart();
+        lumieresRenderer.sprite = lumieresOn;
     }
 
     public void ResetAllTimers()
