@@ -20,7 +20,7 @@ public class EventManager : MonoBehaviour {
 
     private int nbEventDay1 = 4;
     private int nbEventDay2 = 1;
-    private int nbEventDay3 = 3;
+    private int nbEventDay3 = 0;
     //private int nbEventDay4 = 0;
     //private int nbEventDay5 = 0;
     //private int nbEventDay6 = 0;
