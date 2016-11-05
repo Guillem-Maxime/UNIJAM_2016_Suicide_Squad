@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour {
 
     public GameObject prologue;
     public Text prologueText;
-    float prologueDuration = 10.0f;
+    public float prologueDuration = 5.0f;
 
     public GameObject bedroom;
 
@@ -41,5 +41,26 @@ public class UIManager : MonoBehaviour {
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void AfficheGameOver()
+    {
+        prologueText.text = "You lose";
+        StartCoroutine(EndCoroutine());
+    }
+
+    public void AfficheVictoire()
+    {
+        prologueText.text = "You win";
+        StartCoroutine(EndCoroutine());
+    }
+
+    private IEnumerator EndCoroutine()
+    {
+        bedroom.SetActive(false);
+        prologue.SetActive(true);
+        yield return new WaitForSeconds(prologueDuration);
+        game.SetActive(false);
+        menu.SetActive(true);
     }
 }

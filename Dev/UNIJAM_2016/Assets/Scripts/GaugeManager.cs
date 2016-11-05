@@ -23,7 +23,7 @@ public class GaugeManager : MonoBehaviour {
 	void Update () {
 	    if (danger == 100 || fatigue == 100)
         {
-            //uiManager --> affichage du gameOver
+            uiManager.AfficheGameOver();
             daysManager.FirstDay();
             danger = dangerMAX / 2;
             fatigue = fatigueMAX / 2;

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Timer : MonoBehaviour {
 
+    [SerializeField]
     float mTime = 0;
     bool isActivated = false;
 
@@ -15,7 +16,6 @@ public class Timer : MonoBehaviour {
         {
             mTime += Time.deltaTime;
         }
-        Debug.Log(mTime);
 	}
 
     public void LetsStart()
@@ -36,6 +36,11 @@ public class Timer : MonoBehaviour {
     public float Get()
     {
         return mTime;
+    }
+
+    public void Set(float t)
+    {
+        mTime = t;
     }
 
 }
