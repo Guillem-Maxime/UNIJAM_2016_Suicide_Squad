@@ -3,11 +3,17 @@ using System.Collections;
 
 public class Event : MonoBehaviour {
 
-    private string title; 
-
     private float time;
 
     public float Time
+    {
+        get;
+        set;
+    }
+
+    private bool aEteLance = false; 
+
+    public bool AEteLance
     {
         get;
         set;
@@ -21,7 +27,12 @@ public class Event : MonoBehaviour {
 
     public void writeDialogue(string phrase)
     {
+        print("demande à l'UI d'afficher du texte");
+    }
 
+    public void launch()
+    {
+        print("lancement de l'event");
     }
 
 	// Use this for initialization
