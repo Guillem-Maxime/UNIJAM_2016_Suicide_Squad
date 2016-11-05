@@ -36,7 +36,10 @@ public class AnimationScript : MonoBehaviour {
         if (nextTime < Time.time)
         {
             i = (i + 1) % sprites.Length;
+<<<<<<< HEAD
             //Debug.Log(sprites[i]);
+=======
+>>>>>>> b42a1e9db6cb4688d9e17a60326c07f1e1444b3f
             if (sprites[i] != null)
             {
                 srenderer.sprite = sprites[i];
