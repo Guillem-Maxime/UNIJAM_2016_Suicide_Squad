@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
+
 
 public class InteractionHandler : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-        foreach(DragHandler dragHandler in FindObjectsOfType<DragHandler>())
-            dragHandler.CollisionEvent += Interaction;
-	}
+	void Start ()
+    {
+        foreach(DropHandler dropHandler in FindObjectsOfType<DropHandler>())
+         dropHandler.dropEvent += Interaction;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -16,7 +19,7 @@ public class InteractionHandler : MonoBehaviour {
 
     private void Interaction(Object itemDragged, Object itemCollided)
     {
-        
+
         switch (itemDragged.getName())
         {
             case ("Gloves"):
@@ -69,7 +72,7 @@ public class InteractionHandler : MonoBehaviour {
 
     private void destroyItem(Object target)
     {
-        Destroy(target);
+        Destroy(target.gameObject);
     }
 
     private void sound()
@@ -100,7 +103,7 @@ public class InteractionHandler : MonoBehaviour {
 
     private void changeSprite(Object obj, int index)
     {
-        obj.GetComponent<SpriteRenderer>().sprite = obj.spriteList[index];
+        obj.gameObject.GetComponent<Image>().sprite = obj.spriteList[index];
     }
 
     private void translateObject(Vector3 positionToTranslate, Object obj)

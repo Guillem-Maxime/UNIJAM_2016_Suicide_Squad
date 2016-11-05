@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,19 +18,16 @@ public class Object : MonoBehaviour{
     public List<Sprite> spriteList;
 
     private bool isDragged;
-    //private bool isAttached;
-    //public bool getIsAttached() { return isAttached; }
-    //public void setIsAttached(bool) {  }
 
 	// Use this for initialization
 	void Start () {
         if(spriteList.Count == 0)
         {
-            spriteList.Add(this.GetComponent<Renderer>().GetComponent<Sprite>());
+            spriteList.Add(this.gameObject.GetComponent<Image>().sprite);
         }
         else
         {
-            spriteList[0] = this.GetComponent<Renderer>().GetComponent<Sprite>();
+            spriteList[0] = this.gameObject.GetComponent<Image>().sprite;
         }
 
 	}

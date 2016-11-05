@@ -7,12 +7,10 @@ using System.Collections;
 
 public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
 
-    public delegate void CollisionDelegate(Object itemBeingDragged, Object itemCollided);
-
-    public event CollisionDelegate CollisionEvent;
-
     public static Object itemBeingDragged;
     private Vector3 startPosition;
+    [SerializeField]
+    //private CanvasGroup canvasGroup;
 
     #region IBeginDragHandler implementation
 
@@ -20,6 +18,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     {
         itemBeingDragged = gameObject.GetComponent<Object>();
         startPosition = transform.position;
+        GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
     #endregion
@@ -41,29 +40,11 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     {
         itemBeingDragged = null;
         transform.position = startPosition;
+        GetComponent<CanvasGroup>().blocksRaycasts = true;
 
     }
 
     #endregion
-
-    void OnCollisionEnter2D(Collision2D coll)
-    {
-
-        Debug.Log("Collide on Drop");
-
-        if (coll.gameObject.GetComponent<Object>().getTag() == "interact")
-        {
-            Debug.Log("Collide on Interact");
-
-            Object itemCollided = coll.gameObject.GetComponent<Object>();
-
-            if (CollisionEvent != null)
-            {
-                CollisionEvent(itemBeingDragged, itemCollided);
-            }
-        }
-
-    }
 
 
 }
