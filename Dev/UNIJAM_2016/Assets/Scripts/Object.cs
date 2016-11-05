@@ -1,42 +1,33 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+
 
 public class Object : MonoBehaviour{
 
     [SerializeField]
-    private string name;
-    public string getName() { return name; }
+    private string nameObject;
+    public string getName() { return nameObject; }
+    private string tagObject;
+    public string getTag() { return tagObject; }
+
+    [SerializeField]
+    public List<Sprite> spriteList;
 
     private bool isDragged;
-
-    private Ray ray;
-    private RaycastHit hit;
-
-    private Vector3 initialPosition;
-
-    public Vector3 getInitialPosition()
-    {
-        return initialPosition;
-    }
-
-    public LayerMask interactions;
+    //private bool isAttached;
+    //public bool getIsAttached() { return isAttached; }
+    //public void setIsAttached(bool) {  }
 
 	// Use this for initialization
 	void Start () {
-        initialPosition = new Vector3(0, 0, 0);
-        this.transform.position = initialPosition;
-        isDragged = false;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
         
-        
-    }
-
-    private void Dragging()
-    {
         
     }
 

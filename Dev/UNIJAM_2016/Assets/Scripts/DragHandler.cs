@@ -51,7 +51,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.tag == "interactable")
+        if (coll.gameObject.GetComponent<Object>().getTag() == "interactable")
         {
             Object itemCollided = coll.gameObject.GetComponent<Object>();
 

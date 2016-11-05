@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Character : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    [SerializeField]
+    public List<Sprite> spriteList;
+
+    // Use this for initialization
+    void Start () {
 	
 	}
 	

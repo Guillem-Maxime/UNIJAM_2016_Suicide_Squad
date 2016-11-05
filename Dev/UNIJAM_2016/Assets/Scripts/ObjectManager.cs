@@ -22,9 +22,6 @@ public class ObjectManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        detectClick();
-
-
     }
 
     public void addObject(Object obj)
@@ -55,29 +52,4 @@ public class ObjectManager : MonoBehaviour {
         return result;
     }
 
-    void detectClick()
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        }
-        if (Physics.Raycast(ray, out hit, 50f, interactions))
-        {
-
-            Object pointedObject = searchInList(hit.collider.gameObject);
-
-            if (hit.collider.gameObject.tag == "dragable")
-            {
-                if (Input.GetKey(KeyCode.Mouse0))
-                {
-                    pointedObject.gameObject.transform.position = Input.mousePosition;
-                }
-                else
-                {
-                    pointedObject.gameObject.transform.position = pointedObject.getInitialPosition();
-                }
-
-            }
-        }
-    }
 }
