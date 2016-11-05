@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Character.cs" />
     <Compile Include="Assets\Scripts\DaysManager.cs" />
     <Compile Include="Assets\Scripts\DragHandler.cs" />
+    <Compile Include="Assets\Scripts\DropHandler.cs" />
     <Compile Include="Assets\Scripts\Event.cs" />
     <Compile Include="Assets\Scripts\EventManager.cs" />
     <Compile Include="Assets\Scripts\GaugeManager.cs" />
