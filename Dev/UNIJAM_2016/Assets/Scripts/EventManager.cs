@@ -15,7 +15,7 @@ public class EventManager : MonoBehaviour {
     //private Event[] eDaySeven;
     //private Event[] eDayEight;
 
-    private int nbEventDay1 = 1;
+    private int nbEventDay1 = 4;
     private int nbEventDay2 = 0;
     private int nbEventDay3 = 0;
     //private int nbEventDay4 = 0;
@@ -121,28 +121,37 @@ public class EventManager : MonoBehaviour {
 
     public void BuildActions()
     {
-        eDayOne[0].Time = 10.0f;
+        eDayOne[0].Time = 45.0f;
         eDayOne[0].action = () => ActionOne0();
+
+        eDayOne[1].Time = 20.0f;
+        eDayOne[1].action = () => ActionOne1();
+
+        eDayOne[2].Time = 110.0f;
+        eDayOne[2].action = () => ActionOne2();
+
+        eDayOne[3].Time = 140.0f;
+        eDayOne[3].action = () => ActionOne3();
     }
 
     public void ActionOne0()
     {
-        Debug.Log("0");
+        Debug.Log("la barricade se détériore");
     }
 
     public void ActionOne1()
     {
-        Debug.Log("1");
+        Debug.Log("la radio émet du grésillement");
     }
 
     public void ActionOne2()
     {
-        Debug.Log("2");
+        Debug.Log("miaulement venant de la réserve");
     }
 
     public void ActionOne3()
     {
-        Debug.Log("3");
+        Debug.Log("arrivée du chat");
     }
 
     public void ResetEvents()
