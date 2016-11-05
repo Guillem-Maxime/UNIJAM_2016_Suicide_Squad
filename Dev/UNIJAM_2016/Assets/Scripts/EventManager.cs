@@ -142,27 +142,27 @@ public class EventManager : MonoBehaviour {
     public void ActionOne0()
     {
         Debug.Log("la barricade se détériore");
-        uiManager.Dialog("Mince, la barricade !", 5.0f);
+        uiManager.Dialog("NON! Ma barricade !", 5.0f);
         gaugeManager.AddDanger(20);
     }
 
     public void ActionOne1()
     {
         Debug.Log("la radio émet du grésillement");
-        uiManager.Dialog("Krrr krr... (grésillements)", 5.0f);
+        uiManager.Dialog("*grésillement* Aujourd'hui, le temps sera pluvieux sur tout le pays.\r\n Le vent sera fort et des *grésillements* nous vous conseillons de \r\n rester chez vous !", 5.0f);
         SoundManager.PlayBruitage("Sounds/Bruitages/Porte");
     }
 
     public void ActionOne2()
     {
         Debug.Log("miaulement venant de la réserve");
-        uiManager.Dialog("Miaou miaou", 5.0f);
+        uiManager.Dialog("Qu'est-ce que c'est que ça ?", 5.0f);
     }
 
     public void ActionOne3()
     {
         Debug.Log("arrivée du chat");
-        uiManager.Dialog("Tiens... un chat?", 5.0f);
+        uiManager.Dialog("Salut toi ! Qu'est-ce que tu faisais là-dedans ?", 5.0f);
     }
 
     public void ResetEvents()

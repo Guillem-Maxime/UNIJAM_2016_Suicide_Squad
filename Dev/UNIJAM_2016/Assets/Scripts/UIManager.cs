@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour {
 
     public GameObject prologue;
     public Text prologueText;
-    public float prologueDuration = 5.0f;
+    public float prologueDuration = 13.0f;
 
     public GameObject bedroom;
 
