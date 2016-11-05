@@ -10,6 +10,7 @@ public class Object : MonoBehaviour{
     [SerializeField]
     private string nameObject;
     public string getName() { return nameObject; }
+    public void setName(string n) { nameObject = n; }
 
     [SerializeField]
     public List<Sprite> spriteList;

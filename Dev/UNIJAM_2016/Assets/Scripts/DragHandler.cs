@@ -7,12 +7,14 @@ using System.Collections;
 
 public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
 
-    private bool isDraggable;
+    private bool isDraggable = true;
     public bool getDraggable() { return isDraggable; }
     public void setDraggable(bool b) { isDraggable = b; }
 
     public static Object itemBeingDragged;
-    private Vector3 startPosition;
+    private Vector3 fixPosition;
+    public Vector3 getFixPosition() { return fixPosition; }
+    public  void setFixPosition(Vector3 pos) { fixPosition = pos; }
     [SerializeField]
     //private CanvasGroup canvasGroup;
 
@@ -23,7 +25,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         if (isDraggable)
         {
             itemBeingDragged = gameObject.GetComponent<Object>();
-            startPosition = transform.position;
+            fixPosition = transform.position;
             GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
 
@@ -38,6 +40,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         newPosition.z = 0;
         transform.position = newPosition;
+        //this.gameObject.transform.position = newPosition;
     }
 
     #endregion
@@ -47,7 +50,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public void OnEndDrag(PointerEventData eventData)
     {
         itemBeingDragged = null;
-        transform.position = startPosition;
+        transform.position = fixPosition;
         GetComponent<CanvasGroup>().blocksRaycasts = true;
 
     }
