@@ -127,7 +127,22 @@ public class EventManager : MonoBehaviour {
 
     public void ActionOne0()
     {
-        Debug.Log("cet event fonctionne si je m'affiche au bout de 10 secondes le premier jour");
+        Debug.Log("0");
+    }
+
+    public void ActionOne1()
+    {
+        Debug.Log("1");
+    }
+
+    public void ActionOne2()
+    {
+        Debug.Log("2");
+    }
+
+    public void ActionOne3()
+    {
+        Debug.Log("3");
     }
 
     public void ResetEvents()
