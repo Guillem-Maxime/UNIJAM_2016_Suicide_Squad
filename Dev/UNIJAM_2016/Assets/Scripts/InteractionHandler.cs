@@ -50,6 +50,9 @@ public class InteractionHandler : MonoBehaviour {
         }
     }
 
+    public delegate void barreMilkaDelegate();
+    public barreMilkaDelegate barreMilkaEvent;
+
     private void SimpleInteractionDayOne(Object itemClicked) { 
         switch (itemClicked.getName())
         {
@@ -85,7 +88,11 @@ public class InteractionHandler : MonoBehaviour {
                 if(itemClicked.GetComponent<Image>().sprite != itemClicked.spriteList[1])
                 {
                     changeSprite(itemClicked, 1);
-                    ActivateObject("barreMilka", true);
+                    //ActivateObject("barreMilka");
+                    if(barreMilkaEvent != null)
+                    {
+                        barreMilkaEvent();
+                    }
                     soundBruit("tiroir");
                 }else
                 {
@@ -367,10 +374,14 @@ public class InteractionHandler : MonoBehaviour {
         character.GetComponent<SpriteRenderer>().sprite = character.spriteList[index];
     }
     
-    private void ActivateObject(string name, bool isActive)
+    private void ActivateObject(string name)
     {
         ObjectManager objectManager = FindObjectOfType<ObjectManager>();
-        objectManager.setSpecificActive(objectManager.searchInList(name), isActive);
+        foreach(GameObject go in objectManager.currentListObject)
+        {
+            if (go.GetComponent<Object>().getName() == name)
+                go.SetActive(true);
+        }
     }
 
     private void GotAMatch()

@@ -28,8 +28,20 @@ public class ObjectManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        FindObjectOfType<InteractionHandler>().barreMilkaEvent += activeBarreMilka;
         currentListObject = new List<GameObject>();
 	}
+
+    public void activeBarreMilka()
+    {
+        foreach(GameObject go in currentListObject)
+        {
+            if(go.GetComponent<Object>().getName() == "barreMilka")
+            {
+                go.SetActive(true);
+            }
+        }
+    }
 
     public void setAllObjectsActive(bool isActive)
     {
