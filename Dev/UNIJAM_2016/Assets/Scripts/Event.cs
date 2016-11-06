@@ -13,7 +13,7 @@ public class Event : MonoBehaviour {
         set;
     }
 
-    private bool aEteLance = false; 
+    //private bool aEteLance = false; 
 
     public bool AEteLance
     {
