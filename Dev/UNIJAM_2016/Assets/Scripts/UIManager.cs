@@ -24,8 +24,7 @@ public class UIManager : MonoBehaviour {
     public Sprite blackSprite;
     public Sprite introSprite;
 
-    public delegate void FindObjectsDelegate();
-    public event FindObjectsDelegate findObjectsEvent;
+
 
     void Start () {
         daysManager = GameObject.FindGameObjectWithTag("DaysManager").GetComponent<DaysManager>();
@@ -91,10 +90,6 @@ public class UIManager : MonoBehaviour {
         yield return new WaitForSeconds(prologueDuration);
         prologue.SetActive(false);
         bedroom.SetActive(true);
-        if(findObjectsEvent != null)
-        {
-            findObjectsEvent();
-        }
     }
 
     public void Quit()
