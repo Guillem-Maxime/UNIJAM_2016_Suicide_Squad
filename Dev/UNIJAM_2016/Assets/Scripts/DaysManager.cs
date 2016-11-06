@@ -52,6 +52,7 @@ public class DaysManager : MonoBehaviour {
         
         eventManager = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>();
         uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        objectManager = GameObject.FindGameObjectWithTag("ObjectsManager").GetComponent<ObjectManager>();
         lumieresRenderer.sprite = lumieresOff;
     }
 	
