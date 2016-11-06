@@ -59,4 +59,9 @@ public class HighlightFantasy : MonoBehaviour {
     {
         image.sprite = sprites[etat];
     }
+
+    public void changeState(int i)
+    {
+        etat = i; 
+    }
 }
