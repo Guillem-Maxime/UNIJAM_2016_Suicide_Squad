@@ -49,6 +49,7 @@ public class SoundManager : Singleton<SoundManager>
     public AudioClip water;
     public AudioClip boit;
     public AudioClip ronronne;
+    public AudioClip etincelle;
 
 
     /// <summary>
@@ -153,6 +154,9 @@ public class SoundManager : Singleton<SoundManager>
                 break;
             case "ronronne":
                 originalClip = ronronne;
+                break;
+            case "etincelle":
+                originalClip = etincelle;
                 break;
         }
         sourceBruitage.PlayOneShot(originalClip);
