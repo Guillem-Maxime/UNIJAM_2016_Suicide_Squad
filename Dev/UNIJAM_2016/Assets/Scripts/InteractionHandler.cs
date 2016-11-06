@@ -168,7 +168,7 @@ public class InteractionHandler : MonoBehaviour {
                 {
                     case ("Personnage"):
                         destroyItem(itemDragged);
-                        AddFatigue(+35);
+                        AddMoral(+35);
                         printSentence("Exactement ce dont j'avais besoin...");
                         break;
                     default:
@@ -282,7 +282,8 @@ public class InteractionHandler : MonoBehaviour {
                 if (itemDroppedOn.getName() == "PorteManteaux")
                 {
                     printSentence("C'était celle de mon frère.. il la portait à l'époque.");
-                    change
+                    changeSprite(itemDragged, 1);
+
                 }
                 else
                     printSentence("Rien ne se passe...");
