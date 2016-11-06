@@ -151,6 +151,7 @@ public class UIManager : MonoBehaviour {
         bedroom.SetActive(true);
         prologue.SetActive(false);
         lampe.SetActive(true);
+        SoundManager.ChangeMusique("salad");
     }
 
     public void fadeIn(GameObject o)

@@ -30,7 +30,6 @@ public class DaysManager : MonoBehaviour {
 
         prologueTab = new String[nmbDayMAX];
         prologueTab[0] = "Aujourd'hui, rien ne va plus. Le monde est trop dangereux, des zombies partout... \r\n Je dois rester chez moi. Les murs sont froids, je me sens partir un peu plus chaque jour.\r\n Combien de temps vais-je tenir ?";
-
         prologueTab[1] = "Jour 2";
         prologueTab[2] = "Jour 3";
         /*prologueTab[3] = "Je suis le texte du cinquième jour.\r\n Non, j'ai menti.";
@@ -84,36 +83,36 @@ public class DaysManager : MonoBehaviour {
 
     public void NextDay()
     {
-        objectManager.unloadSceneObjects();
+        //objectManager.unloadSceneObjects();
 
         if (mDay + 1 < nmbDayMAX)
         {
             timerTab[mDay].Stop();
             timerTab[mDay].Reset();
             mDay++;
-            objectManager.loadSceneObjects(mDay);
-            objectManager.setActive(false);
+            //objectManager.loadSceneObjects(mDay);
+            //objectManager.setActive(false);
             uiManager.AffichePrologue(prologueTab[mDay]);
-            objectManager.setActive(true);
+            //objectManager.setActive(true);
             timerTab[mDay].Set(-uiManager.BasicDuration);
             timerTab[mDay].LetsStart();
         }
         else
         {
-            objectManager.setActive(false);
+            //objectManager.setActive(false);
             uiManager.AfficheVictoire();
-            objectManager.unloadSceneObjects();
+            //objectManager.unloadSceneObjects();
         }
     }
 
     public void FirstDay()
     {
-        SoundManager.PlayMusique("saddest");
+        SoundManager.ChangeMusique("saddest");
         mDay = 0;
-        objectManager.loadSceneObjects(mDay);
-        objectManager.setActive(false);
+        //objectManager.loadSceneObjects(mDay);
+        //objectManager.setActive(false);
         uiManager.AfficheMultiplePrologue(parts, waits, 7);
-        objectManager.setActive(true);
+        //objectManager.setActive(true);
     }
 
     public void ResetAllTimers()
