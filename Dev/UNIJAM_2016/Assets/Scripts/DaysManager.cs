@@ -83,7 +83,7 @@ public class DaysManager : MonoBehaviour {
             timerTab[mDay].Stop();
             timerTab[mDay].Reset();
             mDay++;
-            objectManager.loadSceneObjects(mDay + 1);
+            objectManager.loadSceneObjects(mDay);
             objectManager.setActive(false);
             uiManager.AffichePrologue(prologueTab[mDay]);
             objectManager.setActive(true);
@@ -102,7 +102,7 @@ public class DaysManager : MonoBehaviour {
     {
         SoundManager.PlayMusique("saddest");
         mDay = 0;
-        objectManager.loadSceneObjects(mDay + 1);
+        objectManager.loadSceneObjects(mDay);
         objectManager.setActive(false);
         uiManager.AfficheMultiplePrologue(parts, 7, 3.0f);
         objectManager.setActive(true);

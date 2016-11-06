@@ -35,7 +35,7 @@ public class ObjectManager : MonoBehaviour {
 
     public void loadSceneObjects(int numberDay) 
     {
-        switch (numberDay)
+        switch (numberDay + 1)
         {
             case (1):
                 LoadDayOne();
@@ -63,6 +63,8 @@ public class ObjectManager : MonoBehaviour {
 
     public void unloadSceneObjects()
     {
+        foreach (GameObject gameObj in listObject)
+            Destroy(gameObj);
         listObject.Clear();
     }
 
