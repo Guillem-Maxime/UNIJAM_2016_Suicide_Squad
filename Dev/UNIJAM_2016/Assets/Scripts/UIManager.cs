@@ -61,11 +61,11 @@ public class UIManager : MonoBehaviour {
 
     private IEnumerator PrologueCoroutine(float prologueDuration)
     {
-        //bedroom.SetActive(false);
+        bedroom.SetActive(false);
         prologue.SetActive(true);
         yield return new WaitForSeconds(prologueDuration);
         prologue.SetActive(false);
-        //bedroom.SetActive(true);
+        bedroom.SetActive(true);
 
     }
 
@@ -73,7 +73,8 @@ public class UIManager : MonoBehaviour {
 
     private IEnumerator MultipleCoroutine(string[] phrases, int n, float prologueDuration)
     {
-        //bedroom.SetActive(false);
+        float x = 0;
+        bedroom.SetActive(false);
         prologue.SetActive(true);
         for (int i = 0; i < n; i++)
         {
@@ -82,7 +83,37 @@ public class UIManager : MonoBehaviour {
             {
                 INTRO.sprite = introSprite;
             }
-            yield return new WaitForSeconds(prologueDuration);
+
+            
+            while (x < 1.0f)
+            {
+                x = x + 0.05f;
+                if (i == n - 1)
+                {
+                    INTRO.color = new Vector4(prologueText.color.r, prologueText.color.b, prologueText.color.g, x);
+                }
+                else {
+                    prologueText.color = new Vector4(prologueText.color.r, prologueText.color.b, prologueText.color.g, x);
+                }
+                yield return new WaitForSeconds(0.05f);
+            }
+
+            yield return new WaitForSeconds(prologueDuration - 1.0f);
+
+
+            while (x > 0)
+            {
+                x = x - 0.05f;
+                if (i == n - 1)
+                {
+                    INTRO.color = new Vector4(prologueText.color.r, prologueText.color.b, prologueText.color.g, x);
+                }
+                else {
+                    prologueText.color = new Vector4(prologueText.color.r, prologueText.color.b, prologueText.color.g, x);
+                }
+                yield return new WaitForSeconds(0.05f);
+            }
+
             if (i == n - 1)
             {
                 INTRO.sprite = blackSprite;
@@ -90,7 +121,7 @@ public class UIManager : MonoBehaviour {
         }
         yield return new WaitForSeconds(prologueDuration);
         prologue.SetActive(false);
-        //bedroom.SetActive(true);
+        bedroom.SetActive(true);
     }
 
     public void Quit()
@@ -113,13 +144,49 @@ public class UIManager : MonoBehaviour {
     private IEnumerator EndCoroutine()
     {
         daysManager.ResetAllTimers();
-        //bedroom.SetActive(false);
+        bedroom.SetActive(false);
         prologue.SetActive(true);
         yield return new WaitForSeconds(BasicDuration);
         game.SetActive(false);
         menu.SetActive(true);
-        //bedroom.SetActive(true);
+        bedroom.SetActive(true);
         prologue.SetActive(false);
         lampe.SetActive(true);
     }
+
+    public void fadeIn(GameObject o)
+    {
+        SpriteRenderer rend = o.GetComponent<SpriteRenderer>();
+        StartCoroutine(FadingInCoroutine(rend));
+    }
+
+    private IEnumerator FadingInCoroutine(SpriteRenderer rend)
+    {
+        float x = 0;
+        while (x < 1.0f)
+        {
+            x = x + 0.05f;
+            rend.color = new Vector4(rend.color.r, rend.color.b, rend.color.g, x);
+            yield return new WaitForSeconds(0.05f);
+        }
+    }
+
+    public void fadeOut(GameObject o)
+    {
+        SpriteRenderer rend = o.GetComponent<SpriteRenderer>();
+        StartCoroutine(FadingOutCoroutine(rend));
+    }
+
+    private IEnumerator FadingOutCoroutine(SpriteRenderer rend)
+    {
+        float x = 1;
+        while (x > 0)
+        {
+            x = x - 0.05f;
+            rend.color = new Vector4(rend.color.r, rend.color.b, rend.color.g, x);
+            yield return new WaitForSeconds(0.05f);
+        }
+
+    }
+
 }

@@ -20,7 +20,6 @@ public class ChiliEffect : MonoBehaviour {
         if (Vector3.Distance(targetPos,transform.position) < 1.0f)
         {
             transform.position = initpos;
-            Debug.Log("lol");
             x = Random.Range(-1.0f, 1.0f);
             y = Random.Range(-1.0f, 1.0f);
             varVec = new Vector3(x, y, 0);

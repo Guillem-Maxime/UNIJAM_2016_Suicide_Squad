@@ -21,7 +21,7 @@ public class ObjectManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        
+        listObject = new List<GameObject>();
 	}
 	
 
