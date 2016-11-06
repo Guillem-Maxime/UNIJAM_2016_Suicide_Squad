@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour {
 
     void Start () {
         daysManager = GameObject.FindGameObjectWithTag("DaysManager").GetComponent<DaysManager>();
+        SoundManager.PlayMusique("salad");
 	}
 	
 

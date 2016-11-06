@@ -32,6 +32,7 @@ public class SoundManager : Singleton<SoundManager>
     //************************
 
     public AudioClip saddest;
+    public AudioClip salad;
 
     //************************
     //********Bruitages*******
@@ -232,6 +233,9 @@ public class SoundManager : Singleton<SoundManager>
         {
             case "saddest":
                 originalClip = saddest;
+                break;
+            case "salad":
+                originalClip = salad;
                 break;
         }
                 source.clip = originalClip;

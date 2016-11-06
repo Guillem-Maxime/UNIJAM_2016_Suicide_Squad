@@ -30,8 +30,8 @@ public class DaysManager : MonoBehaviour {
         prologueTab = new String[nmbDayMAX];
         prologueTab[0] = "Aujourd'hui, rien ne va plus. Le monde est trop dangereux, des zombies partout... \r\n Je dois rester chez moi. Les murs sont froids, je me sens partir un peu plus chaque jour.\r\n Combien de temps vais-je tenir ?";
 
-        prologueTab[1] = "Je suis le texte du deuxième jour";
-        prologueTab[2] = "Je suis le texte du troisième jour";
+        prologueTab[1] = "Jour 2";
+        prologueTab[2] = "Jour 3";
         /*prologueTab[3] = "Je suis le texte du cinquième jour.\r\n Non, j'ai menti.";
         prologueTab[4] = "Je suis le vrai texte du cinquième jour.";
         prologueTab[5] = "Je suis le texte du sixième jour.";
