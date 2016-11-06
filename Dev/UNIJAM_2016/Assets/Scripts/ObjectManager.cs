@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,22 +7,89 @@ enum objectTypes { };
 
 public class ObjectManager : MonoBehaviour {
 
-    List<Object> listObject;
+    List<GameObject> listObject;
 
-    private bool isDraggingObject;
-    private Ray ray;
-    private RaycastHit hit;
+    public delegate void FindObjectsDelegate();
+    public event FindObjectsDelegate findObjectsEvent;
 
-    public LayerMask interactions;
+    [SerializeField]
+    private List<GameObject> firstDayList;
+    private List<GameObject> secondDayList;
+    private List<GameObject> thirdDayList;
 
     // Use this for initialization
     void Start () {
 	
 	}
 	
-	// Update is called once per frame
-	void Update () {
 
+    public void setActive(bool isActive)
+    {
+            foreach(GameObject gameObj in listObject)
+            {
+                gameObj.SetActive(isActive);
+            }
+    }
+
+    public void loadSceneObjects(int numberDay) 
+    {
+        switch (numberDay)
+        {
+            case (1):
+                LoadDayOne();
+                if (findObjectsEvent != null)
+                {
+                    findObjectsEvent();
+                }
+                break;
+            case (2):
+                LoadDayTwo();
+                if (findObjectsEvent != null)
+                {
+                    findObjectsEvent();
+                }
+                break;
+            case (3):
+                LoadDayThree();
+                if (findObjectsEvent != null)
+                {
+                    findObjectsEvent();
+                }
+                break;
+        }
+    }
+
+    public void unloadSceneObjects()
+    {
+        listObject.Clear();
+    }
+
+
+    private void LoadDayOne()
+    {
+        foreach(GameObject gameObj in firstDayList)
+        {
+            GameObject obj = (GameObject)Instantiate(gameObj);
+            listObject.Add(obj);
+        }
+    }
+
+    private void LoadDayTwo()
+    {
+        foreach (GameObject gameObj in secondDayList)
+        {
+            GameObject obj = (GameObject)Instantiate(gameObj);
+            listObject.Add(obj);
+        }
+    }
+
+    private void LoadDayThree()
+    {
+        foreach (GameObject gameObj in thirdDayList)
+        {
+            GameObject obj = (GameObject)Instantiate(gameObj);
+            listObject.Add(obj);
+        }
     }
 
     public void addObject(Object obj)
@@ -51,5 +119,6 @@ public class ObjectManager : MonoBehaviour {
 
         return result;
     }
+
 
 }

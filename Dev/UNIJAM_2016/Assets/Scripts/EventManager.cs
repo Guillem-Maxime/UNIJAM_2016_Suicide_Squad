@@ -9,9 +9,6 @@ public class EventManager : MonoBehaviour {
 
     public GameObject chat;
 
-    public delegate void FindObjectsDelegate();
-    public event FindObjectsDelegate findObjectsEvent;
-
     public Dictionary<int, Event[]> eventsOfDays;
 
     private Event[] eDayOne;
@@ -177,10 +174,6 @@ public class EventManager : MonoBehaviour {
         uiManager.Dialog("Qu'est-ce que c'est que ça ?", 5.0f);
         SoundManager.PlayBruitage("miaou");
         chat.SetActive(true);
-        if (findObjectsEvent != null)
-        {
-            findObjectsEvent();
-        }
     }
 
     public void ActionOne3()
