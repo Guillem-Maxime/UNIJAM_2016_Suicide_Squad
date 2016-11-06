@@ -7,7 +7,7 @@ enum objectTypes { };
 
 public class ObjectManager : MonoBehaviour {
 
-    List<GameObject> listObject;
+    List<GameObject> currentListObject;
 
     public delegate void FindObjectsDelegate();
     public event FindObjectsDelegate findObjectsEvent;
@@ -21,13 +21,32 @@ public class ObjectManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        listObject = new List<GameObject>();
+        currentListObject = new List<GameObject>();
 	}
-	
 
-    public void setActive(bool isActive)
+    public void setAllObjectsActive(bool isActive)
     {
-            foreach(GameObject gameObj in listObject)
+        foreach (GameObject gameObj in currentListObject)
+        {
+            gameObj.SetActive(isActive);
+        }
+        foreach (GameObject gameObj in firstDayList)
+        {
+            gameObj.SetActive(isActive);
+        }
+        foreach (GameObject gameObj in secondDayList)
+        {
+            gameObj.SetActive(isActive);
+        }
+        foreach (GameObject gameObj in thirdDayList)
+        {
+            gameObj.SetActive(isActive);
+        }
+    }
+
+    public void setCurrentObjectsActive(bool isActive)
+    {
+            foreach(GameObject gameObj in currentListObject)
             {
                 gameObj.SetActive(isActive);
             }
@@ -39,6 +58,8 @@ public class ObjectManager : MonoBehaviour {
         {
             case (1):
                 LoadDayOne();
+                setAllObjectsActive(false);
+                setCurrentObjectsActive(true);
                 if (findObjectsEvent != null)
                 {
                     findObjectsEvent();
@@ -46,6 +67,8 @@ public class ObjectManager : MonoBehaviour {
                 break;
             case (2):
                 LoadDayTwo();
+                setAllObjectsActive(false);
+                setCurrentObjectsActive(true);
                 if (findObjectsEvent != null)
                 {
                     findObjectsEvent();
@@ -53,6 +76,8 @@ public class ObjectManager : MonoBehaviour {
                 break;
             case (3):
                 LoadDayThree();
+                setAllObjectsActive(false);
+                setCurrentObjectsActive(true);
                 if (findObjectsEvent != null)
                 {
                     findObjectsEvent();
@@ -63,9 +88,9 @@ public class ObjectManager : MonoBehaviour {
 
     public void unloadSceneObjects()
     {
-        foreach (GameObject gameObj in listObject)
-            Destroy(gameObj);
-        listObject.Clear();
+        foreach (GameObject gameObj in currentListObject)
+            gameObj.SetActive(false);
+        currentListObject.Clear();
     }
 
 
@@ -73,8 +98,7 @@ public class ObjectManager : MonoBehaviour {
     {
         foreach(GameObject gameObj in firstDayList)
         {
-            GameObject obj = (GameObject)Instantiate(gameObj);
-            listObject.Add(obj);
+            currentListObject.Add(gameObj);
         }
     }
 
@@ -82,8 +106,7 @@ public class ObjectManager : MonoBehaviour {
     {
         foreach (GameObject gameObj in secondDayList)
         {
-            GameObject obj = (GameObject)Instantiate(gameObj);
-            listObject.Add(obj);
+            currentListObject.Add(gameObj);
         }
     }
 
@@ -91,19 +114,18 @@ public class ObjectManager : MonoBehaviour {
     {
         foreach (GameObject gameObj in thirdDayList)
         {
-            GameObject obj = (GameObject)Instantiate(gameObj);
-            listObject.Add(obj);
+            currentListObject.Add(gameObj);
         }
     }
-
+    /*
     public void addObject(GameObject obj)
     {
-        listObject.Add(obj);
+        currentListObject.Add(obj);
     }
 
     public void removeObject(GameObject obj)
     {
-        listObject.Remove(obj);
+        curentListObject.Remove(obj);
     }
 
     public void removeObject(int i)
@@ -123,6 +145,6 @@ public class ObjectManager : MonoBehaviour {
 
         return result;
     }
-
+    */
 
 }

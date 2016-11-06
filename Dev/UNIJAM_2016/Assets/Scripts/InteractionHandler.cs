@@ -10,11 +10,15 @@ public class InteractionHandler : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        ObjectManager objectManager = GameObject.FindGameObjectWithTag("ObjectsManager").GetComponent<ObjectManager>();
+        if (objectManager == null) Debug.LogError("pas de tag objectManager");
+        objectManager.findObjectsEvent += FindObjects;
     }
 
     public void FindObjects()
     {
         uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        if (uiManager == null) Debug.LogError("pas de tag uiManager");
         foreach (DropHandler dropHandler in FindObjectsOfType<DropHandler>())
         {
             dropHandler.dropEvent += DoubleInteraction;

@@ -11,7 +11,7 @@ public class DaysManager : MonoBehaviour {
     String[] prologueTab;
     EventManager eventManager;
     UIManager uiManager;
-    ObjectManager objectManager;
+    private ObjectManager objectManager;
 
     public SpriteRenderer lumieresRenderer;
     public Sprite lumieresOn;
@@ -30,6 +30,7 @@ public class DaysManager : MonoBehaviour {
 
         prologueTab = new String[nmbDayMAX];
         prologueTab[0] = "Aujourd'hui, rien ne va plus. Le monde est trop dangereux, des zombies partout... \r\n Je dois rester chez moi. Les murs sont froids, je me sens partir un peu plus chaque jour.\r\n Combien de temps vais-je tenir ?";
+
         prologueTab[1] = "Jour 2";
         prologueTab[2] = "Jour 3";
         /*prologueTab[3] = "Je suis le texte du cinquième jour.\r\n Non, j'ai menti.";
@@ -90,29 +91,22 @@ public class DaysManager : MonoBehaviour {
             timerTab[mDay].Stop();
             timerTab[mDay].Reset();
             mDay++;
-            //objectManager.loadSceneObjects(mDay);
-            //objectManager.setActive(false);
             uiManager.AffichePrologue(prologueTab[mDay]);
-            //objectManager.setActive(true);
             timerTab[mDay].Set(-uiManager.BasicDuration);
             timerTab[mDay].LetsStart();
+            objectManager.loadSceneObjects(mDay);
         }
         else
         {
-            //objectManager.setActive(false);
             uiManager.AfficheVictoire();
-            //objectManager.unloadSceneObjects();
         }
     }
 
     public void FirstDay()
     {
-        SoundManager.ChangeMusique("saddest");
+        SoundManager.PlayMusique("saddest");
         mDay = 0;
-        //objectManager.loadSceneObjects(mDay);
-        //objectManager.setActive(false);
         uiManager.AfficheMultiplePrologue(parts, waits, 7);
-        //objectManager.setActive(true);
     }
 
     public void ResetAllTimers()
@@ -126,11 +120,13 @@ public class DaysManager : MonoBehaviour {
         eventManager.ResetEvents();
         lumieresRenderer.sprite = lumieresOff;
         SoundManager.StopMusique();
+        objectManager.setAllObjectsActive(false);
     }
 
     public void GameStart()
     {
         timerTab[mDay].LetsStart();
         lumieresRenderer.sprite = lumieresOn;
+        objectManager.loadSceneObjects(0);
     }
 }
