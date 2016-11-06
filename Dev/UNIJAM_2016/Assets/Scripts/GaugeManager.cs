@@ -16,6 +16,8 @@ public class GaugeManager : MonoBehaviour {
     public Slider dangerSlider;
     public Slider fatigueSlider;
 
+    float nextTime = 0;
+    float delay = 2.0f;
     
 
 	void Start () {
@@ -30,11 +32,20 @@ public class GaugeManager : MonoBehaviour {
 	    if (danger == 100 || fatigue == 100)
         {
             uiManager.AfficheGameOver();
-            danger = dangerMAX / 2;
-            fatigue = fatigueMAX / 2;
+            danger = 60;
+            fatigue = 60;
         }
+
+        if (nextTime < Time.time)
+        {
+            nextTime = Time.time + delay;
+            fatigue--;
+        }
+
         dangerSlider.value = danger;
         fatigueSlider.value = fatigue;
+
+
     }
 
     public void AddDanger(int var)
