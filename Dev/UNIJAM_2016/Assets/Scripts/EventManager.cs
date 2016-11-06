@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class EventManager : MonoBehaviour {
 
@@ -8,6 +9,8 @@ public class EventManager : MonoBehaviour {
     GaugeManager gaugeManager;
 
     public GameObject chat;
+    public GameObject barricade;
+    public Sprite newbarricade;
 
     public Dictionary<int, Event[]> eventsOfDays;
 
@@ -139,7 +142,7 @@ public class EventManager : MonoBehaviour {
         eDayOne[2].Time = 110.0f;
         eDayOne[2].action = () => ActionOne2();
 
-        eDayOne[3].Time = 140.0f;
+        eDayOne[3].Time = 115.0f;
         eDayOne[3].action = () => ActionOne3();
 
         eDayTwo[0].Time = 0.01f;
@@ -160,6 +163,7 @@ public class EventManager : MonoBehaviour {
     public void ActionOne0()
     {
         uiManager.Dialog("Oh non! Je dois rapidement trouver de quoi renforcer\r\n ma barricade !", 5.0f);
+        barricade.GetComponent<Image>().sprite = newbarricade;
         gaugeManager.AddDanger(20);
     }
 
@@ -171,7 +175,7 @@ public class EventManager : MonoBehaviour {
 
     public void ActionOne2()
     {
-        uiManager.Dialog("Qu'est-ce que c'est que ça ?", 5.0f);
+        uiManager.Dialog("Qu'est-ce que c'est que ça ?", 3.0f);
         SoundManager.PlayBruitage("miaou");
         chat.SetActive(true);
     }
