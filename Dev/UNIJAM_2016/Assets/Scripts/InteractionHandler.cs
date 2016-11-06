@@ -65,11 +65,11 @@ public class InteractionHandler : MonoBehaviour {
                 break;
             case ("PorteDehors"):
                 printSentence("Mauvaise idée, je n'ai pas envie de me retrouver avec un zombie...");
-                //soundBruit("PorteFermée");
+                soundBruit("closedDoor");
                 break;
             case ("PorteRemise"):
                 printSentence("Ah c'est fermé...");
-                //soundBruit("PorteVerouillée");
+                soundBruit("shutDoor");
                 break;
             //case ("Barricade"):
             //    printSentence("Oh non ! Je dois rapidement trouver de quoi renforcer ma barricade !");
@@ -79,18 +79,18 @@ public class InteractionHandler : MonoBehaviour {
                 break;
             case ("Chat"):
                 printSentence("Où étais-tu passé ?");
-                soundBruit("miaou");
+                soundBruit("ronronne");
                 break;
             case ("Tiroir"):
                 if(itemClicked.GetComponent<Image>().sprite != itemClicked.spriteList[1])
                 {
                     changeSprite(itemClicked, 1);
                     ActivateObject("barreMilka", true);
-                    //soundBruit("ouvertureTiroir");
+                    soundBruit("tiroir");
                 }else
                 {
                     changeSprite(itemClicked, 0);
-                    //soundBruit("fermetureTiroir");
+                    soundBruit("tiroir");
                 }
                 break;
             case ("PorteManteaux"):
@@ -183,7 +183,8 @@ public class InteractionHandler : MonoBehaviour {
                         setPosition(itemDroppedOn.transform.position, itemDragged);
                         printSentence("Ça devrait suffire à les retenir...");
                         AddDanger(-30);
-                       // changeSprite(itemDragged, 1);
+                        soundBruit("chaise");
+                        changeSprite(itemDragged, 1);
                         break;
                     default:
                         printSentence("Rien ne se passe...");
@@ -197,6 +198,7 @@ public class InteractionHandler : MonoBehaviour {
                         changeSprite(itemDragged, 1);
                         changeSprite(itemDroppedOn, 1);
                         printSentence("Au moins je n'aurai pas de problème de soif.");
+                        soundBruit("water");
                         WaitReverse(2.0f, itemDroppedOn, 0);
                         break;
                     case ("Personnage"):
@@ -205,6 +207,7 @@ public class InteractionHandler : MonoBehaviour {
                             destroyItem(itemDragged);
                             AddMoral(20);
                             printSentence("Ça fait du bien.");
+                            soundBruit("boit");
                         }
                         else
                         {

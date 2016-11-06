@@ -42,6 +42,13 @@ public class SoundManager : Singleton<SoundManager>
     /// </summary>
     public AudioClip radio1;
     public AudioClip miaou;
+    public AudioClip closedDoor;
+    public AudioClip shutDoor;
+    public AudioClip tiroir;
+    public AudioClip chaise;
+    public AudioClip water;
+    public AudioClip boit;
+    public AudioClip ronronne;
 
 
     /// <summary>
@@ -125,6 +132,27 @@ public class SoundManager : Singleton<SoundManager>
                 break;
             case "miaou":
                 originalClip = miaou;
+                break;
+            case "closedDoor":
+                originalClip = closedDoor;
+                break;
+            case "shutDoor":
+                originalClip = shutDoor;
+                break;
+            case "tiroir":
+                originalClip = tiroir;
+                break;
+            case "chaise":
+                originalClip = chaise;
+                break;
+            case "boit":
+                originalClip = boit;
+                break;
+            case "water":
+                originalClip = water;
+                break;
+            case "ronronne":
+                originalClip = ronronne;
                 break;
         }
         sourceBruitage.PlayOneShot(originalClip);
