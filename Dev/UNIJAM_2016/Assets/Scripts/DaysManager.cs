@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.UI;
 
 public class DaysManager : MonoBehaviour {
+
+    public Text timerText;
 
     float timeMaxPerDay = 150.0f;
     int nmbDayMAX = 3;
@@ -63,6 +66,8 @@ public class DaysManager : MonoBehaviour {
         uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         objectManager = GameObject.FindGameObjectWithTag("ObjectsManager").GetComponent<ObjectManager>();
         lumieresRenderer.sprite = lumieresOff;
+
+        updateTimerText();
     }
 	
 	void Update () {
@@ -81,6 +86,12 @@ public class DaysManager : MonoBehaviour {
                 }
             }
         }
+        updateTimerText();
+    }
+
+    void updateTimerText()
+    {
+        timerText.text = "" + ((int)timerTab[mDay].Get()) / 60 + " : " + ((int)timerTab[mDay].Get()) % 60;
     }
 
     public void NextDay()
