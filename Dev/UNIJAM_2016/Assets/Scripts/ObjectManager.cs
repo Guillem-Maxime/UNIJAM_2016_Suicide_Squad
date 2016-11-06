@@ -7,7 +7,8 @@ enum objectTypes { };
 
 public class ObjectManager : MonoBehaviour {
 
-    List<GameObject> currentListObject;
+    [SerializeField]
+    public List<GameObject> currentListObject;
 
     public delegate void FindObjectsDelegate();
     public event FindObjectsDelegate findObjectsEvent;
@@ -55,9 +56,18 @@ public class ObjectManager : MonoBehaviour {
         switch (mDay)
         {
             case (0):
+                int i = 0;
                 foreach (GameObject gameObj in currentListObject)
                 {
-                    if (!isInList(gameObj, delayedFirstDayList)) gameObj.SetActive(isActive);
+
+                    Debug.Log(i);
+                    if (!isInList(gameObj, delayedFirstDayList))
+                    {
+                        gameObj.SetActive(isActive);
+                        string str = gameObj.GetComponent<Object>().getName();
+                        Debug.Log(str + " !isInList");
+                    }
+                    i++;
                 }
             break;
             case (1):
@@ -83,11 +93,34 @@ public class ObjectManager : MonoBehaviour {
             case (1):
                 LoadDayOne();
                 setAllObjectsActive(false);
+                foreach(GameObject go in currentListObject)
+                {
+                    Debug.Log("in current : " + go.GetComponent<Object>().getName());
+                }
+                foreach(GameObject go in delayedFirstDayList)
+                {
+                    Debug.Log("in delayed " + go.GetComponent<Object>().getName());
+                }
                 setCurrentObjectsActive(true, mDay);
+                foreach (GameObject go in currentListObject)
+                {
+                    string strg = go.name;
+                    string stro = go.GetComponent<Object>().getName();
+                    Debug.Log("AFTERSETCURRENTOBJECTSACTIVE gameObject name is " + strg + " and Object name is " + stro);
+                    if (go.activeInHierarchy) Debug.Log("IS ACTIVE");
+                }
+
                 if (findObjectsEvent != null)
                 {
                     findObjectsEvent();
                 }
+
+                foreach (GameObject go in currentListObject)
+                {
+                    string strg = go.name;
+                    string stro = go.GetComponent<Object>().getName();
+                }
+
                 break;
             case (2):
                 LoadDayTwo();
@@ -181,7 +214,7 @@ public class ObjectManager : MonoBehaviour {
     {
         foreach(GameObject gObj in list)
         {
-            if (gameObject == gObj) return true;
+            if (gameObject.GetComponent<Object>().getName() == gObj.GetComponent<Object>().getName()) return true;
         }
         return false;
     }

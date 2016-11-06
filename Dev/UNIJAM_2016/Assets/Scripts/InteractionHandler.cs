@@ -82,7 +82,7 @@ public class InteractionHandler : MonoBehaviour {
                 soundBruit("miaou");
                 break;
             case ("Tiroir"):
-                if(itemClicked.GetComponent<Image>().sprite == itemClicked.spriteList[0])
+                if(itemClicked.GetComponent<Image>().sprite != itemClicked.spriteList[1])
                 {
                     changeSprite(itemClicked, 1);
                     ActivateObject("barreMilka", true);
@@ -114,7 +114,7 @@ public class InteractionHandler : MonoBehaviour {
                 printSentence("Aide moi !");
                     break;
             case ("Carton"):
-                if (itemClicked.GetComponent<Image>().sprite == itemClicked.spriteList[0])
+                if (itemClicked.GetComponent<Image>().sprite != itemClicked.spriteList[1])
                     changeSprite(itemClicked, 1);
                 else
                     changeSprite(itemClicked, 0);
@@ -203,8 +203,12 @@ public class InteractionHandler : MonoBehaviour {
                         if (itemDragged.GetComponent<Image>().sprite == itemDragged.spriteList[1])
                         {
                             destroyItem(itemDragged);
-                            AddMoral(10);
+                            AddMoral(20);
                             printSentence("Ça fait du bien.");
+                        }
+                        else
+                        {
+                            printSentence("Elle ne sert à rien vide.");
                         }
                             break;
                     default:
