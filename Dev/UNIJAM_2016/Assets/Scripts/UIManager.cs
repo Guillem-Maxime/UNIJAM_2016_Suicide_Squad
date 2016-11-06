@@ -25,7 +25,6 @@ public class UIManager : MonoBehaviour {
     public Sprite introSprite;
 
 
-
     void Start () {
         daysManager = GameObject.FindGameObjectWithTag("DaysManager").GetComponent<DaysManager>();
         SoundManager.PlayMusique("salad");
@@ -62,18 +61,19 @@ public class UIManager : MonoBehaviour {
 
     private IEnumerator PrologueCoroutine(float prologueDuration)
     {
-        bedroom.SetActive(false);
+        //bedroom.SetActive(false);
         prologue.SetActive(true);
         yield return new WaitForSeconds(prologueDuration);
         prologue.SetActive(false);
-        bedroom.SetActive(true);
+        //bedroom.SetActive(true);
+
     }
 
 
 
     private IEnumerator MultipleCoroutine(string[] phrases, int n, float prologueDuration)
     {
-        bedroom.SetActive(false);
+        //bedroom.SetActive(false);
         prologue.SetActive(true);
         for (int i = 0; i < n; i++)
         {
@@ -90,7 +90,7 @@ public class UIManager : MonoBehaviour {
         }
         yield return new WaitForSeconds(prologueDuration);
         prologue.SetActive(false);
-        bedroom.SetActive(true);
+        //bedroom.SetActive(true);
     }
 
     public void Quit()
@@ -113,12 +113,12 @@ public class UIManager : MonoBehaviour {
     private IEnumerator EndCoroutine()
     {
         daysManager.ResetAllTimers();
-        bedroom.SetActive(false);
+        //bedroom.SetActive(false);
         prologue.SetActive(true);
         yield return new WaitForSeconds(BasicDuration);
         game.SetActive(false);
         menu.SetActive(true);
-        bedroom.SetActive(true);
+        //bedroom.SetActive(true);
         prologue.SetActive(false);
         lampe.SetActive(true);
     }

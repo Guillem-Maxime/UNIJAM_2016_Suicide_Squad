@@ -13,13 +13,15 @@ public class ObjectManager : MonoBehaviour {
     public event FindObjectsDelegate findObjectsEvent;
 
     [SerializeField]
-    private List<GameObject> firstDayList;
-    private List<GameObject> secondDayList;
-    private List<GameObject> thirdDayList;
+    public List<GameObject> firstDayList;
+    [SerializeField]
+    public List<GameObject> secondDayList;
+    [SerializeField]
+    public List<GameObject> thirdDayList;
 
     // Use this for initialization
     void Start () {
-	
+        
 	}
 	
 
@@ -92,12 +94,12 @@ public class ObjectManager : MonoBehaviour {
         }
     }
 
-    public void addObject(Object obj)
+    public void addObject(GameObject obj)
     {
         listObject.Add(obj);
     }
 
-    public void removeObject(Object obj)
+    public void removeObject(GameObject obj)
     {
         listObject.Remove(obj);
     }
@@ -107,9 +109,9 @@ public class ObjectManager : MonoBehaviour {
         listObject.RemoveAt(i);
     }
 
-    private Object searchInList(GameObject gObject)
+    private GameObject searchInList(GameObject gObject)
     {
-        Object result = new Object();
+        GameObject result = new GameObject();
 
         for (int i = 0; i < listObject.Count; i++)
         {
