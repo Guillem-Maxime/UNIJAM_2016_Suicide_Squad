@@ -22,8 +22,8 @@ public class GaugeManager : MonoBehaviour {
         uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         danger = dangerMAX / 2;
         fatigue = fatigueMAX / 2;
-        //FindObjectOfType<InteractionHandler>().ChangeDangerEvent += AddDanger;
-        //FindObjectOfType<InteractionHandler>().ChangeFatigueEvent += AddFatigue;
+        FindObjectOfType<InteractionHandler>().ChangeDangerEvent += AddDanger;
+        FindObjectOfType<InteractionHandler>().ChangeFatigueEvent += AddFatigue;
     }
 	
 	void Update () {

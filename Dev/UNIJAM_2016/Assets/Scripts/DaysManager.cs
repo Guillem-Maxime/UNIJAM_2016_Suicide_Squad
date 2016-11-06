@@ -7,6 +7,7 @@ public class DaysManager : MonoBehaviour {
     float timeMaxPerDay = 150.0f;
     int nmbDayMAX = 3;
     int mDay = 0;
+    public int getMDay() { return mDay; }
     Timer[] timerTab;
     String[] prologueTab;
     EventManager eventManager;

@@ -15,9 +15,15 @@ public class ObjectManager : MonoBehaviour {
     [SerializeField]
     public List<GameObject> firstDayList;
     [SerializeField]
+    public List<GameObject> delayedFirstDayList;
+    [SerializeField]
     public List<GameObject> secondDayList;
     [SerializeField]
+    public List<GameObject> delayedSecondDayList;
+    [SerializeField]
     public List<GameObject> thirdDayList;
+    [SerializeField]
+    public List<GameObject> delayedThirdDayList;
 
     // Use this for initialization
     void Start () {
@@ -44,7 +50,7 @@ public class ObjectManager : MonoBehaviour {
         }
     }
 
-    public void setCurrentObjectsActive(bool isActive)
+    public void setCurrentObjectsActive(bool isActive, int mDay)
     {
             foreach(GameObject gameObj in currentListObject)
             {
@@ -52,14 +58,14 @@ public class ObjectManager : MonoBehaviour {
             }
     }
 
-    public void loadSceneObjects(int numberDay) 
+    public void loadSceneObjects(int mDay) 
     {
-        switch (numberDay + 1)
+        switch (mDay + 1)
         {
             case (1):
                 LoadDayOne();
                 setAllObjectsActive(false);
-                setCurrentObjectsActive(true);
+                setCurrentObjectsActive(true, mDay);
                 if (findObjectsEvent != null)
                 {
                     findObjectsEvent();
@@ -68,7 +74,7 @@ public class ObjectManager : MonoBehaviour {
             case (2):
                 LoadDayTwo();
                 setAllObjectsActive(false);
-                setCurrentObjectsActive(true);
+                setCurrentObjectsActive(true, mDay);
                 if (findObjectsEvent != null)
                 {
                     findObjectsEvent();
@@ -77,7 +83,7 @@ public class ObjectManager : MonoBehaviour {
             case (3):
                 LoadDayThree();
                 setAllObjectsActive(false);
-                setCurrentObjectsActive(true);
+                setCurrentObjectsActive(true, mDay);
                 if (findObjectsEvent != null)
                 {
                     findObjectsEvent();
@@ -117,6 +123,7 @@ public class ObjectManager : MonoBehaviour {
             currentListObject.Add(gameObj);
         }
     }
+
     /*
     public void addObject(GameObject obj)
     {
@@ -132,19 +139,33 @@ public class ObjectManager : MonoBehaviour {
     {
         listObject.RemoveAt(i);
     }
+    */
 
-    private GameObject searchInList(GameObject gObject)
+    public void setSpecificActive(GameObject gameObject, bool isActive)
+    {
+        gameObject.SetActive(isActive);
+    }
+
+    public GameObject searchInList(string name)
     {
         GameObject result = new GameObject();
 
-        for (int i = 0; i < listObject.Count; i++)
+        foreach (GameObject gameObject in currentListObject)
         {
-            if (listObject[i].gameObject == gObject)
-                result = listObject[i];
+            if (gameObject.GetComponent<Object>().getName() == name)
+                result = gameObject;
         }
 
         return result;
     }
-    */
+    
+    private bool isInList(GameObject gameObject, List<GameObject> list)
+    {
+        foreach(GameObject gObj in list)
+        {
+            if (gameObject == gObj) return true;
+        }
+        return false;
+    }
 
 }

@@ -6,6 +6,7 @@ using System.Collections;
 public class InteractionHandler : MonoBehaviour {
 
     private UIManager uiManager;
+    private int mDay;
 
     // Use this for initialization
     void Start()
@@ -13,6 +14,7 @@ public class InteractionHandler : MonoBehaviour {
         ObjectManager objectManager = GameObject.FindGameObjectWithTag("ObjectsManager").GetComponent<ObjectManager>();
         if (objectManager == null) Debug.LogError("pas de tag objectManager");
         objectManager.findObjectsEvent += FindObjects;
+        mDay =  FindObjectOfType<DaysManager>().getMDay();
     }
 
     public void FindObjects()
@@ -39,25 +41,44 @@ public class InteractionHandler : MonoBehaviour {
 
     private void SimpleInteraction(Object itemClicked)
     {
+        switch (mDay)
+        {
+            case (0):
+                SimpleInteractionDayOne(itemClicked);
+                break;
+            case (1):
+                SimpleInteractionDayTwo(itemClicked);
+                break;
+            case (2):
+                SimpleInteractionDayThree(itemClicked);
+                break;
+        }
+    }
+
+    private void SimpleInteractionDayOne(Object itemClicked) { 
         switch (itemClicked.getName())
         {
             case ("Radio"):
+                changeSprite(itemClicked, 1);
                 soundBruit("radio1");
-                printSentence("...Les forces de l'ordre tentent toujours de...");
-                printSentence("...Les émeutes grossissent et se multiplient...");
+                string str = "...Les forces de l'ordre tentent toujours de... \n ...Les émeutes grossissent et se multiplient...";
+                printSentence(str);
+                WaitRadio(5.0f, itemClicked);
                 break;
-            case ("fenetre"):
+            case ("Barricade"):
                 printSentence("Je ferai mieux de ne pas me montrer c'est trop dangereux.");
                 break;
             case ("PorteDehors"):
                 printSentence("Mauvaise idée, je n'ai pas envie de me retrouver avec un zombie...");
+                //soundBruit("PorteFermée");
                 break;
             case ("PorteRemise"):
                 printSentence("Ah c'est fermé...");
+                //soundBruit("PorteVerouillée");
                 break;
-            case ("Barricade"):
-                printSentence("Oh non ! Je dois rapidement trouver de quoi renforcer ma barricade !");
-                break;
+            //case ("Barricade"):
+            //    printSentence("Oh non ! Je dois rapidement trouver de quoi renforcer ma barricade !");
+            //    break;
             case ("Robinet"):
                 printSentence("J'ai toujours de l'eau mais il me faudrait un récipient.");
                 break;
@@ -66,9 +87,22 @@ public class InteractionHandler : MonoBehaviour {
                 soundBruit("miaou");
                 break;
             case ("Tiroir"):
-                changeSprite(itemClicked, 1);
-                itemClicked.gameObject.GetComponent<DragHandler>().setDraggable(false);
-                CreateObjectDrag("barreMilka");
+                if(itemClicked.GetComponent<Image>().sprite == itemClicked.spriteList[0])
+                {
+                    changeSprite(itemClicked, 1);
+                    ActivateObject("barreMilka", true);
+                    //soundBruit("ouvertureTiroir");
+                }else
+                {
+                    changeSprite(itemClicked, 0);
+                    //soundBruit("fermetureTiroir");
+                }
+                break;
+            case ("PorteManteaux"):
+                printSentence("Je n'ai pas de veste, pour ce que ça pourrait me servir...");
+                break;
+            case ("Plaid"):
+                printSentence("Je n'ai ni froid, ni envie de me cacher...");
                 break;
             default:
                 printSentence("Rien ne se passe...");
@@ -76,9 +110,33 @@ public class InteractionHandler : MonoBehaviour {
         }
     }
 
-    private void DoubleInteraction(Object itemDragged, Object itemDroppedOn)
+    private void SimpleInteractionDayTwo(Object itemClicked)
     {
 
+    }
+
+    private void SimpleInteractionDayThree(Object itemClicked)
+    {
+
+    }
+
+    private void DoubleInteraction(Object itemDragged, Object itemDroppedOn)
+    {
+        switch (mDay)
+        {
+            case (0):
+                DoubleInteractionDayOne(itemDragged, itemDroppedOn);
+                break;
+            case (1):
+                DoubleInteractionDayTwo(itemDragged, itemDroppedOn);
+                break;
+            case (2):
+                DoubleInteractionDayThree(itemDragged, itemDroppedOn);
+                break;
+        }
+    }
+
+    private void DoubleInteractionDayOne(Object itemDragged, Object itemDroppedOn) { 
         switch (itemDragged.getName())
         {
             case ("BarreMilka"):
@@ -174,7 +232,15 @@ public class InteractionHandler : MonoBehaviour {
         }
     }
 
+    private void DoubleInteractionDayTwo(Object itemDragged, Object itemDroppedOn)
+    {
 
+    }
+
+    private void DoubleInteractionDayThree(Object itemDragged, Object itemDroppedOn)
+    {
+
+    }
 
     private void printSentence(string sentenceToPrint)
     {
@@ -237,31 +303,10 @@ public class InteractionHandler : MonoBehaviour {
         character.GetComponent<SpriteRenderer>().sprite = character.spriteList[index];
     }
     
-    private GameObject CreateObjectDrag(string name)
+    private void ActivateObject(string name, bool isActive)
     {
-        GameObject result = new GameObject();
-        result.AddComponent<Object>();
-        result.AddComponent<DragHandler>();
-        result.GetComponent<Object>().setName(name);
-        return result;
-    }
-
-    private GameObject CreateObjectDrop(string name)
-    {
-        GameObject result = new GameObject();
-        result.AddComponent<Object>();
-        result.AddComponent<DropHandler>();
-        result.GetComponent<Object>().setName(name);
-        return result;
-    }
-
-    private GameObject CreateObjectClick(string name)
-    {
-        GameObject result = new GameObject();
-        result.AddComponent<Object>();
-        result.AddComponent<ClickHandler>();
-        result.GetComponent<Object>().setName(name);
-        return result;
+        ObjectManager objectManager = FindObjectOfType<ObjectManager>();
+        objectManager.setSpecificActive(objectManager.searchInList(name), isActive);
     }
 
     private void GotAMatch()
@@ -277,5 +322,17 @@ public class InteractionHandler : MonoBehaviour {
     private void displayImage(string name)
     {
         //Display a big image
+    }
+
+    private void WaitRadio(float seconds, Object itemClicked)
+    {
+        StartCoroutine(WaitCoroutineRadio(seconds, itemClicked));
+    }
+
+    private IEnumerator WaitCoroutineRadio(float seconds, Object itemClicked)
+    {
+        yield return new WaitForSeconds(seconds);
+        changeSprite(itemClicked, 1);
+
     }
 }
