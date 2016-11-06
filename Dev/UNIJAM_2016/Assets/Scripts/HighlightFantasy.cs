@@ -53,12 +53,10 @@ public class HighlightFantasy : MonoBehaviour {
     public void highlightOn()
     {
         image.sprite = h_sprites[etat];
-        Debug.Log("Highlight ON : etat " + etat + " et sprite " + image.sprite);
     }
 
     public void highlightOff()
     {
         image.sprite = sprites[etat];
-        Debug.Log("Highlight OFF : etat " + etat + " et sprite " + image.sprite);
     }
 }

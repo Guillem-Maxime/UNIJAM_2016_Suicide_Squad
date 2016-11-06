@@ -203,7 +203,7 @@ public class InteractionHandler : MonoBehaviour {
                         if (itemDragged.GetComponent<Image>().sprite == itemDragged.spriteList[1])
                         {
                             destroyItem(itemDragged);
-                            AddFatigue(10);
+                            AddMoral(10);
                             printSentence("Ça fait du bien.");
                         }
                             break;
