@@ -52,10 +52,28 @@ public class ObjectManager : MonoBehaviour {
 
     public void setCurrentObjectsActive(bool isActive, int mDay)
     {
-            foreach(GameObject gameObj in currentListObject)
-            {
-                gameObj.SetActive(isActive);
-            }
+        switch (mDay)
+        {
+            case (0):
+                foreach (GameObject gameObj in currentListObject)
+                {
+                    if (!isInList(gameObj, delayedFirstDayList)) gameObj.SetActive(isActive);
+                }
+            break;
+            case (1):
+                foreach (GameObject gameObj in currentListObject)
+                {
+                    if (!isInList(gameObj, delayedSecondDayList)) gameObj.SetActive(isActive);
+                }
+                break;
+            case (2):
+                foreach (GameObject gameObj in currentListObject)
+                {
+                    if (!isInList(gameObj, delayedThirdDayList)) gameObj.SetActive(isActive);
+                }
+                break;
+                
+        }
     }
 
     public void loadSceneObjects(int mDay) 
