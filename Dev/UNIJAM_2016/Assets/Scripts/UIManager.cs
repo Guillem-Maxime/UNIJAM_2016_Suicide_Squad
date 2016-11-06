@@ -29,6 +29,8 @@ public class UIManager : MonoBehaviour {
     public Sprite oldS;
     public Sprite newS;
 
+    bool godMode = false;
+
     //private ObjectManager objectsManager;
 
 
@@ -40,7 +42,14 @@ public class UIManager : MonoBehaviour {
 	
 
 	void Update () {
-	    
+	    if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            godMode = true;
+        }
 	}
 
     public void Dialog(string phrase, float duration)
@@ -93,7 +102,7 @@ public class UIManager : MonoBehaviour {
             }
 
             
-            while (x < 1.0f)
+            while (x < 1.0f && !godMode)
             {
                 x = x + 0.05f;
                 if (i == n - 1)
@@ -106,10 +115,10 @@ public class UIManager : MonoBehaviour {
                 yield return new WaitForSeconds(0.05f);
             }
 
-            yield return new WaitForSeconds(waits[i] - 1.0f);
+            yield return new WaitForSeconds(godMode?0.01f:(waits[i] - 1.0f));
 
 
-            while (x > 0)
+            while (x > 0 && !godMode)
             {
                 x = x - 0.05f;
                 if (i == n - 1)
