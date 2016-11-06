@@ -54,9 +54,9 @@ public class UIManager : MonoBehaviour {
         StartCoroutine(PrologueCoroutine(prologueDuration));
     }
 
-    public void AfficheMultiplePrologue(string[] phrases, int n, float prologueDuration = 8.0f)
+    public void AfficheMultiplePrologue(string[] phrases, float[] waits, int n)
     {
-        StartCoroutine(MultipleCoroutine(phrases, n, prologueDuration));
+        StartCoroutine(MultipleCoroutine(phrases, waits, n));
     }
 
     private IEnumerator PrologueCoroutine(float prologueDuration)
@@ -71,7 +71,7 @@ public class UIManager : MonoBehaviour {
 
 
 
-    private IEnumerator MultipleCoroutine(string[] phrases, int n, float prologueDuration)
+    private IEnumerator MultipleCoroutine(string[] phrases, float[] waits, int n)
     {
         float x = 0;
         bedroom.SetActive(false);
@@ -98,7 +98,7 @@ public class UIManager : MonoBehaviour {
                 yield return new WaitForSeconds(0.05f);
             }
 
-            yield return new WaitForSeconds(prologueDuration - 1.0f);
+            yield return new WaitForSeconds(waits[i] - 1.0f);
 
 
             while (x > 0)
@@ -119,7 +119,6 @@ public class UIManager : MonoBehaviour {
                 INTRO.sprite = blackSprite;
             }
         }
-        yield return new WaitForSeconds(prologueDuration);
         prologue.SetActive(false);
         bedroom.SetActive(true);
     }

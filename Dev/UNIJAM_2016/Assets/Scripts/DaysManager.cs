@@ -18,7 +18,7 @@ public class DaysManager : MonoBehaviour {
     public Sprite lumieresOff;
 
     string[] parts;
-    
+    float[] waits;
 
 	void Start () {
         timerTab = new Timer[nmbDayMAX];
@@ -41,13 +41,21 @@ public class DaysManager : MonoBehaviour {
         prologueTab[8] = "Je suis le texte du dernier jour.";*/
 
         parts = new string[7];
+        waits = new float[7];
         parts[0] = "Aujourd'hui, rien ne va plus.";
+        waits[0] = 2.0f;
         parts[1] = "Le monde est trop dangereux, des zombies partout...\r\n Je dois rester chez moi.";
+        waits[1] = 4.0f;
         parts[2] = "Les murs sont froids. Je me sens partir un peu plus chaque jour.";
+        waits[2] = 2.0f;
         parts[3] = "Combien de temps vais-je tenir?";
+        waits[3] = 2.0f;
         parts[4] = "";
+        waits[4] = 0.5f;
         parts[5] = "Les Semi-affordants vous présentent...";
+        waits[5] = 2.0f;
         parts[6] = "";
+        waits[6] = 4.0f;
 
         
         eventManager = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>();
@@ -104,7 +112,7 @@ public class DaysManager : MonoBehaviour {
         mDay = 0;
         objectManager.loadSceneObjects(mDay);
         objectManager.setActive(false);
-        uiManager.AfficheMultiplePrologue(parts, 7, 3.0f);
+        uiManager.AfficheMultiplePrologue(parts, waits, 7);
         objectManager.setActive(true);
     }
 
