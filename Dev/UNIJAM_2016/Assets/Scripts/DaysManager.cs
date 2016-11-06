@@ -11,7 +11,7 @@ public class DaysManager : MonoBehaviour {
     String[] prologueTab;
     EventManager eventManager;
     UIManager uiManager;
-    ObjectManager objectManager;
+    private ObjectManager objectManager;
 
     public SpriteRenderer lumieresRenderer;
     public Sprite lumieresOn;
@@ -84,25 +84,21 @@ public class DaysManager : MonoBehaviour {
 
     public void NextDay()
     {
-        objectManager.unloadSceneObjects();
+        //objectManager.unloadSceneObjects();
 
         if (mDay + 1 < nmbDayMAX)
         {
             timerTab[mDay].Stop();
             timerTab[mDay].Reset();
             mDay++;
-            objectManager.loadSceneObjects(mDay);
-            objectManager.setActive(false);
             uiManager.AffichePrologue(prologueTab[mDay]);
-            objectManager.setActive(true);
             timerTab[mDay].Set(-uiManager.BasicDuration);
             timerTab[mDay].LetsStart();
+            objectManager.loadSceneObjects(mDay);
         }
         else
         {
-            objectManager.setActive(false);
             uiManager.AfficheVictoire();
-            objectManager.unloadSceneObjects();
         }
     }
 
@@ -110,10 +106,7 @@ public class DaysManager : MonoBehaviour {
     {
         SoundManager.PlayMusique("saddest");
         mDay = 0;
-        objectManager.loadSceneObjects(mDay);
-        objectManager.setActive(false);
         uiManager.AfficheMultiplePrologue(parts, waits, 7);
-        objectManager.setActive(true);
     }
 
     public void ResetAllTimers()
@@ -127,11 +120,13 @@ public class DaysManager : MonoBehaviour {
         eventManager.ResetEvents();
         lumieresRenderer.sprite = lumieresOff;
         SoundManager.StopMusique();
+        objectManager.setAllObjectsActive(false);
     }
 
     public void GameStart()
     {
         timerTab[mDay].LetsStart();
         lumieresRenderer.sprite = lumieresOn;
+        objectManager.loadSceneObjects(0);
     }
 }

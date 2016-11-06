@@ -24,9 +24,12 @@ public class UIManager : MonoBehaviour {
     public Sprite blackSprite;
     public Sprite introSprite;
 
+    private ObjectManager objectsManager;
+
 
     void Start () {
         daysManager = GameObject.FindGameObjectWithTag("DaysManager").GetComponent<DaysManager>();
+        objectsManager = GameObject.FindGameObjectWithTag("ObjectsManager").GetComponent<ObjectManager>();
         SoundManager.PlayMusique("salad");
 	}
 	
