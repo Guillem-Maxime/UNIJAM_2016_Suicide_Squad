@@ -10,7 +10,6 @@ public class EventManager : MonoBehaviour {
 
     public GameObject chat;
     public GameObject barricade;
-    public Sprite newbarricade;
 
     public Dictionary<int, Event[]> eventsOfDays;
 
@@ -163,7 +162,7 @@ public class EventManager : MonoBehaviour {
     public void ActionOne0()
     {
         uiManager.Dialog("Oh non! Je dois rapidement trouver de quoi renforcer\r\n ma barricade !", 5.0f);
-        barricade.GetComponent<Image>().sprite = newbarricade;
+        barricade.SetActive(false);
         gaugeManager.AddDanger(20);
     }
 
