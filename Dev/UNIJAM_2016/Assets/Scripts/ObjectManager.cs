@@ -72,6 +72,7 @@ public class ObjectManager : MonoBehaviour {
                     if (!isInList(gameObj, delayedThirdDayList)) gameObj.SetActive(isActive);
                 }
                 break;
+                
         }
     }
 

@@ -33,11 +33,6 @@ public class InteractionHandler : MonoBehaviour {
         }
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-
-	}
 
     private void SimpleInteraction(Object itemClicked)
     {
@@ -63,7 +58,7 @@ public class InteractionHandler : MonoBehaviour {
                 soundBruit("radio1");
                 string str = "...Les forces de l'ordre tentent toujours de... \n ...Les émeutes grossissent et se multiplient...";
                 printSentence(str);
-                WaitRadio(5.0f, itemClicked);
+                WaitReverse(5.0f, itemClicked, 0);
                 break;
             case ("Barricade"):
                 printSentence("Je ferai mieux de ne pas me montrer c'est trop dangereux.");
@@ -112,7 +107,36 @@ public class InteractionHandler : MonoBehaviour {
 
     private void SimpleInteractionDayTwo(Object itemClicked)
     {
+        switch (itemClicked.getName())
+        {
+            case ("BallePingPong"):
+                soundBruit("miaou");
+                printSentence("Aide moi !");
+                    break;
+            case ("Carton"):
+                if (itemClicked.GetComponent<Image>().sprite == itemClicked.spriteList[0])
+                    changeSprite(itemClicked, 1);
+                else
+                    changeSprite(itemClicked, 0);
+                break;
+            case ("Radio"):
+                changeSprite(itemClicked, 1);
+                soundBruit("radio1");
+                string str = "Aujourd'hui sur toute la région, un temps ensoleillé, \n avec possibilité de nuages et des températures douces";
+                printSentence(str);
+                WaitReverse(5.0f, itemClicked, 0);
+                break;
+            case ("PorteDehors"):
+                printSentence("Il faut que je répare vite !");
+                break;
+            case ("Monstre"):
+                printSentence("Au secours !!");
+                break;
+            default:
+                printSentence("Rien ne se passe...");
+                break;
 
+        }
     }
 
     private void SimpleInteractionDayThree(Object itemClicked)
@@ -144,7 +168,7 @@ public class InteractionHandler : MonoBehaviour {
                 {
                     case ("Personnage"):
                         destroyItem(itemDragged);
-                        AddFatigue(-20);
+                        AddFatigue(+35);
                         printSentence("Exactement ce dont j'avais besoin...");
                         break;
                     default:
@@ -158,10 +182,8 @@ public class InteractionHandler : MonoBehaviour {
                     case ("PorteDehors"):
                         setPosition(itemDroppedOn.transform.position, itemDragged);
                         printSentence("Ça devrait suffire à les retenir...");
-                        AddDanger(-20);
-                        changeSprite(itemDragged, 1);
-
-
+                        AddDanger(-30);
+                       // changeSprite(itemDragged, 1);
                         break;
                     default:
                         printSentence("Rien ne se passe...");
@@ -173,13 +195,15 @@ public class InteractionHandler : MonoBehaviour {
                 {
                     case ("Robinet"):
                         changeSprite(itemDragged, 1);
+                        changeSprite(itemDroppedOn, 1);
                         printSentence("Au moins je n'aurai pas de problème de soif.");
+                        WaitReverse(2.0f, itemDroppedOn, 0);
                         break;
                     case ("Personnage"):
                         if (itemDragged.GetComponent<Image>().sprite == itemDragged.spriteList[1])
                         {
                             destroyItem(itemDragged);
-                            AddFatigue(-20);
+                            AddFatigue(10);
                             printSentence("Ça fait du bien.");
                         }
                             break;
@@ -234,7 +258,39 @@ public class InteractionHandler : MonoBehaviour {
 
     private void DoubleInteractionDayTwo(Object itemDragged, Object itemDroppedOn)
     {
-
+        switch (itemDragged.getName())
+        {
+            case ("Cartes"):
+                if(itemDroppedOn.getName() == "Personnage")
+                {
+                    printSentence("On jouait souvent avec, tous les deux...");
+                    AddMoral(+35);
+                }
+                else
+                    printSentence("Rien ne se passe...");
+                break;
+            case ("Photos"):
+                if (itemDroppedOn.getName() == "Personnage")
+                {
+                    printSentence("Mon frère, mes parents et moi, c'était il y a longtemps ... on s'était bien amusé");
+                    AddMoral(+35);
+                }
+                else
+                    printSentence("Rien ne se passe...");
+                break;
+            case ("Veste"):
+                if (itemDroppedOn.getName() == "PorteManteaux")
+                {
+                    printSentence("C'était celle de mon frère.. il la portait à l'époque.");
+                    change
+                }
+                else
+                    printSentence("Rien ne se passe...");
+                break;
+            default:
+                printSentence("Rien ne se passe...");
+                break;
+        }
     }
 
     private void DoubleInteractionDayThree(Object itemDragged, Object itemDroppedOn)
@@ -275,7 +331,7 @@ public class InteractionHandler : MonoBehaviour {
         }
     }
 
-    private void AddFatigue(int var)
+    private void AddMoral(int var)
     {
         if (ChangeFatigueEvent != null)
         {
@@ -324,15 +380,15 @@ public class InteractionHandler : MonoBehaviour {
         //Display a big image
     }
 
-    private void WaitRadio(float seconds, Object itemClicked)
+    private void WaitReverse(float seconds, Object item, int nbrSprite)
     {
-        StartCoroutine(WaitCoroutineRadio(seconds, itemClicked));
+        StartCoroutine(WaitCoroutineReverse(seconds, item, nbrSprite));
     }
 
-    private IEnumerator WaitCoroutineRadio(float seconds, Object itemClicked)
+    private IEnumerator WaitCoroutineReverse(float seconds, Object item, int nbrSprite)
     {
         yield return new WaitForSeconds(seconds);
-        changeSprite(itemClicked, 1);
+        changeSprite(item, nbrSprite);
 
     }
 }
