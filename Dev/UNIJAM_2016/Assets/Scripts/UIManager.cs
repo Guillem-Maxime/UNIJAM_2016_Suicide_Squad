@@ -24,6 +24,11 @@ public class UIManager : MonoBehaviour {
     public Sprite blackSprite;
     public Sprite introSprite;
 
+
+    public GameObject bedroomBackground;
+    public Sprite oldS;
+    public Sprite newS;
+
     //private ObjectManager objectsManager;
 
 
@@ -155,6 +160,7 @@ public class UIManager : MonoBehaviour {
         prologue.SetActive(false);
         lampe.SetActive(true);
         SoundManager.ChangeMusique("salad");
+        bedroomBackground.GetComponent<SpriteRenderer>().sprite = oldS;
     }
 
     public void fadeIn(GameObject o)
@@ -190,6 +196,11 @@ public class UIManager : MonoBehaviour {
             yield return new WaitForSeconds(0.05f);
         }
 
+    }
+
+    public void ChangeBackgroundOnLampe()
+    {
+        bedroomBackground.GetComponent<SpriteRenderer>().sprite = newS;
     }
 
 }
