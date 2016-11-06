@@ -10,8 +10,6 @@ public class InteractionHandler : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        FindObjectOfType<UIManager>().findObjectsEvent += FindObjects;
-        FindObjectOfType<EventManager>().findObjectsEvent += FindObjects;
     }
 
     public void FindObjects()
